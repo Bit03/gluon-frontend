@@ -4,23 +4,22 @@ import {
   Route
 } from 'react-router-dom';
 
-import Header from './containers/Header';
-import Footer from './containers/Footer';
-import HomePage from './pages/HomePage';
-import RankPage from './pages/RankPage';
-import DetailPage from './pages/DetailPage';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import HomePage from './containers/HomePage';
+import RankPage from './containers/RankPage';
+import DetailPage from './containers/DetailPage';
 
 import { injectGlobal } from 'styled-components';
 import { Container } from './base';
 
 class App extends Component {
   render() {
-    let navs = [{id: "001", name: "首页", url: "/"}, {id: "002", name: "排行版", url: "/rank"}]
 
     return (
         <Router>
           <Container width="100%">
-            <Header title="DApp Rank" navs={navs} />
+            <Header />
             <Route exact path="/" component={HomePage}/>
             <Route path="/rank" component={RankPage}/>
             <Route path="/detail/:id" component={DetailPage}/>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Title, BtnGroup, Btn } from './styles';
-import { Row } from '../../base';
+import { Row } from '../../../../base';
 
 export default class TopBar extends Component{
     render() {

@@ -6,6 +6,7 @@ const Container = styled.div`
     max-width: 1200px;
     flex-direction: column;
     margin: 0 auto;
+    margin-bottom: 40px;
 `;
 
 export {
