@@ -30,7 +30,7 @@ const CarouselWrapper = styled.ul`
     flex: 4;
     align-items: center;
     justify-content: space-around;
-    width: 1240px;
+    width: 100%;
     height: 202px;
     margin-bottom: 11px;
     overflow-y: hidden;

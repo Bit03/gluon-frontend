@@ -50,8 +50,10 @@ const Span = styled.span`
 
 const ItemLink = styled(Link)`
     display: block;
+    position: relative;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 `;
 
 export {
