@@ -31,6 +31,9 @@ export default class DAppList extends Component{
             page: 1,
         })
     }
+    componentDidUnmounted() {
+        window.scrollTo(0,0)
+    }
     _changeShowCard = (value) => {
         return () => {
             this.setState({

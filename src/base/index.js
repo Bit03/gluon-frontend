@@ -32,6 +32,7 @@ const Row = styled.div`
 
 const Col = styled.div`
     flex: ${props => props.flex ? props.flex : 1};
+    position: relative;
 `;
 
 const Title = styled.h1`

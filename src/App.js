@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import HomePage from './containers/HomePage';
 import RankPage from './containers/RankPage';
 import DetailPage from './containers/DetailPage';
+import ScrollToTop from './components/ScrollToTop';
 
 import { injectGlobal } from 'styled-components';
 import { Container } from './base';
@@ -17,14 +18,16 @@ class App extends Component {
   render() {
 
     return (
-        <Router>
-          <Container width="100%">
-            <Header />
-            <Route exact path="/" component={HomePage}/>
-            <Route path="/rank" component={RankPage}/>
-            <Route path="/detail/:id" component={DetailPage}/>
-            <Footer title="DApp Rank"/>
-          </Container>
+        <Router onUpdate={() => window.scrollTo(0, 0)}>
+          <ScrollToTop>
+            <Container width="100%">
+              <Header />
+              <Route exact path="/" component={HomePage}/>
+              <Route path="/rank" component={RankPage}/>
+              <Route path="/detail/:id" component={DetailPage}/>
+              <Footer title="DApp Rank"/>
+            </Container>
+          </ScrollToTop>
         </Router>
     );
   }

@@ -23,11 +23,10 @@ const Wrapper = styled.ul`
 `;
 
 const ItemList = styled.li`
-    a {
-        font-size: 14px;
-        line-height: 17px;
-        color: #3B3B3B;
-    }
+    font-size: 14px;
+    line-height: 17px;
+    color: #3B3B3B;
+    cursor: pointer;
 `;
 
 export {
