@@ -18,7 +18,7 @@ export default class Footer extends Component{
                         <Span>DappRank 只专注于最真实数据排行，只专注于最真实数据排行。</Span>
                         <Span>2017-2018 All rights reserved</Span>
                     </Info>
-                    <Span size="18px" left="250px">合作请洽 bd@blocks.tech</Span>
+                    <Span size="18px" left="300px">合作请洽 bd@blocks.tech</Span>
                 </Row>
             </Content>
         </Container>
