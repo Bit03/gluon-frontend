@@ -12,7 +12,9 @@ export default class DAppList extends Component{
     constructor(props){
         super(props);
         this.state = {
-            sideMenuData: [],
+            sideMenuData: [{
+                platform: "All"
+            }],
             dappData: [],
             showCard: true,
             platform: ""
@@ -20,19 +22,14 @@ export default class DAppList extends Component{
     }
     async componentDidMount(){
         let sideData = await API.getDappPlatform();
-        console.log(sideData)
-        let listData = await API.getDappByPlatform(sideData.results[0].platform);
-        console.log(listData)
+        let listData = await API.getAllDappData();
 
         this.setState({
-            sideMenuData: sideData.results,
+            sideMenuData: this.state.sideMenuData.concat(sideData.results),
             dappData: listData.results,
-            platform: sideData.results[0].platform,
+            platform: "All",
             page: 1,
         })
-    }
-    componentDidUnmounted() {
-        window.scrollTo(0,0)
     }
     _changeShowCard = (value) => {
         return () => {
@@ -57,7 +54,7 @@ export default class DAppList extends Component{
 
         return(
             <Container>
-                <TopBar title="Blockchain" changeShowCard={this._changeShowCard}/>
+                <TopBar title="Blockchain" changeShowCard={this._changeShowCard} showCard={showCard}/>
                 <Row height="27px">
                     <Title color="#bababa" size="20px">platform</Title>
                 </Row>

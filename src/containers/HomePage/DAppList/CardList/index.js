@@ -19,6 +19,7 @@ export default class CardList extends Component{
                     }}>
                         <ImgBlock showSize={showCard}>
                             {/* { item.site.logo !== "" ? <img src={item.site.logo} alt="logo"/> : null} */}
+                            <img src={require('../../../../static/images/default-big-gray.png')} alt="logo"/>
                         </ImgBlock>
                         <InfoBlock showSize={showCard}>
                             <ProjectName>{item.name}</ProjectName>
