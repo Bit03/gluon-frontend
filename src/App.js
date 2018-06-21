@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
 
 import Header from './components/Header';
@@ -9,6 +10,7 @@ import Footer from './components/Footer';
 import HomePage from './containers/HomePage';
 import RankPage from './containers/RankPage';
 import DetailPage from './containers/DetailPage';
+import { Error404Page } from './containers/Error404Page';
 import ScrollToTop from './components/ScrollToTop';
 
 import { injectGlobal } from 'styled-components';
@@ -22,9 +24,12 @@ class App extends Component {
           <ScrollToTop>
             <Container width="100%">
               <Header />
-              <Route exact path="/" component={HomePage}/>
-              <Route path="/rank" component={RankPage}/>
-              <Route path="/detail/:id" component={DetailPage}/>
+              <Switch>
+                <Route exact path="/" component={HomePage}/>
+                <Route path="/rank" component={RankPage}/>
+                <Route path="/detail/:id" component={DetailPage}/>
+                <Route path="*" component={Error404Page} />
+              </Switch>
               <Footer title="DApp Rank"/>
             </Container>
           </ScrollToTop>
