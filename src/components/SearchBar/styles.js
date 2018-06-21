@@ -10,7 +10,7 @@ const TextInput = styled.input.attrs({
     line-height: 36px;
     border: none;
     padding: 0;
-    padding-left: 20px;
+    padding-left: 36px;
     background: rgba(255,255,255,0.10);
     ::-webkit-input-placeholder {
         color: #fff;
@@ -24,6 +24,7 @@ const TextInput = styled.input.attrs({
 const Wrapper = styled.div`
     width: 240px;
     height: 36px;
+    position: relative;
 `;
 
 export {

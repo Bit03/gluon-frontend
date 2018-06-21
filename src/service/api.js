@@ -10,6 +10,12 @@ import URL from './url';
 //     })
 // }
 class FetchApi{
+    getAllDappData = async ( ) => {
+        let origin = await fetch(URL.getDappData);
+        let result = await origin.json();
+
+        return result;
+    }
     getDappData = async ( slug ) => {
         let origin = await fetch(URL.getDappData + slug);
         let result = await origin.json();
@@ -23,7 +29,12 @@ class FetchApi{
         return result;
     }
     getDappByPlatform = async ( platform ) => {
-        let origin = await fetch(URL.getDappDataByPlatform + platform);
+        let origin;
+        if( platform === "All" ){
+            origin = await fetch(URL.getDappData);
+        }else{
+            origin = await fetch(URL.getDappDataByPlatform + platform);
+        }
         let result = await origin.json();
 
         return result;

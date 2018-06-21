@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from '../../base';
+import { Container, Row, Col, Span } from '../../base';
 import { API } from '../../service';
 import { About,
         Founder,
@@ -15,7 +15,13 @@ import { About,
         Tabs,
         TabsItem,
         RightSide,
-        BlockEle } from './styles';
+        BlockEle,
+        SocialLink,
+        SocialName,
+        StatusItem } from './styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faTwitter, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 export default class DetailPage extends Component{
     constructor(props) {
@@ -47,13 +53,12 @@ export default class DetailPage extends Component{
         this.agencyTop = 0;
         this.githubDataTop = 0;
         this.aboutInfoTop = 0;
+        this.bodyHeight = 0;
     }
     async componentDidMount() {
         let id = this.props.match.params.id;
-        let result = await API.getDappData(id);
+        // let result = await API.getDappData(id);
         this.pageInit();
-
-        console.log(result)
     }
     conmponentDidUnmount() {
         window.onresize = null;
@@ -114,7 +119,6 @@ export default class DetailPage extends Component{
         }
     }
     render(){
-
         return (
             <Container width="100%">
                 <Wrapper>
@@ -157,9 +161,42 @@ export default class DetailPage extends Component{
                         </Col>
                         <Col>
                             <RightSide id="rightSide" fixed={this.state.fixed} left={this.state.rightSide}>
-                                <Website></Website>
-                                <SocialAccount></SocialAccount>
-                                <Status></Status>
+                                <Website>
+                                    <SocialLink href="#123" target="_blank">
+                                        <FontAwesomeIcon icon={faLink} size="lg" color="#bababa"/>
+                                        <SocialName>
+                                            网站 <br/>
+                                        </SocialName>
+                                    </SocialLink>
+                                </Website>
+                                <SocialAccount>
+                                    <SocialLink href="#123" target="_blank">
+                                        <FontAwesomeIcon icon={faGithub} size="lg" color="#0056ff"/>
+                                        <SocialName>GitHub</SocialName>
+                                    </SocialLink>
+                                    <SocialLink href="#123" target="_blank">
+                                        <FontAwesomeIcon icon={faTwitter} size="lg" color="#0056ff"/>
+                                        <SocialName>推特</SocialName>
+                                    </SocialLink>
+                                    <SocialLink href="#123" target="_blank">
+                                        <FontAwesomeIcon icon={faFacebook} size="lg" color="#0056ff"/>
+                                        <SocialName>脸书</SocialName>
+                                    </SocialLink>
+                                    <SocialLink href="#123" target="_blank">
+                                        <FontAwesomeIcon icon={faLinkedin} size="lg" color="#0056ff"/>
+                                        <SocialName>领英</SocialName>
+                                    </SocialLink>
+                                </SocialAccount>
+                                <Status>
+                                    <StatusItem>
+                                        <Span>Status quo</Span>
+                                        <Span>WIP</Span>
+                                    </StatusItem>
+                                    <StatusItem>
+                                        <Span>ICO</Span>
+                                        <Span>Completed</Span>
+                                    </StatusItem>
+                                </Status>
                             </RightSide>
                         </Col>
                     </Row>

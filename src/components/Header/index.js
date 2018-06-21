@@ -28,7 +28,7 @@ export default class Header extends Component{
                 BgImage="linear-gradient(90deg, #63E0D0 0%, #249CFF 100%, #8455D8 100%)">
                 <Content height="66px">
                     <Row>
-                        <Title>DApps Rank</Title>
+                        <Title>DApp Rank</Title>
                         <Navs
                             navItem={navs}
                             activeIndex={ this.state.activeIndex }

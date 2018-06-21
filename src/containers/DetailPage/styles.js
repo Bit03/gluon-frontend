@@ -31,6 +31,7 @@ const TopCharts = styled.div`
     z-index: 10;
 `;
 const RightSide = styled.div`
+    z-index: 10;
     width: 330px;
     position: ${props => props.fixed ? "fixed" : "absolute"};
     left: ${props => props.fixed ? props.left + "px" : "20px"};
@@ -41,16 +42,32 @@ const borderBase = styled.div`
     margin-top: 20px;
     border: 1px solid rgba(137,138,151,0.15);
     border-radius: 3px;
+    padding: 20px 0;
+    padding-left: 34px;
 `;
 const Website = borderBase.extend`
-    height: 81px;
-    margin-top: 10px;
 `;
 const SocialAccount = borderBase.extend`
-    height: 212px;
+`;
+const SocialLink = styled.a`
+    display: block;
+    width: 100%;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    :last-child {
+        margin-bottom: 0;
+    }
+`;
+const SocialName = styled.span`
+    display: block;
+    font-size: 16px;
+    color: #3B3B3B;
+    margin-left: 20px;
 `;
 const Status = borderBase.extend`
-    height: 105px;
+    padding: 20px 34px;
 `;
 const Tabs = styled.ul`
     width: 850px;
@@ -89,6 +106,22 @@ const BlockEle = styled.div`
     height: 70px;
     display: ${props => props.fixed ? "block" : "none"};
 `;
+const StatusItem = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 30px;
+    span {
+        flex: 1;
+        text-align: left;
+        font-size: 16px;
+        color: #878787;
+        :last-child{
+            color: #3b3b3b;
+        }
+    }
+`;
 export { 
     About,
     Founder,
@@ -104,4 +137,7 @@ export {
     Tabs,
     TabsItem,
     RightSide,
-    BlockEle }
+    BlockEle,
+    SocialLink,
+    SocialName,
+    StatusItem }
