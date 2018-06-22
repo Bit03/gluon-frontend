@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Span, ItemLink } from '../../base';
+import { Container, Span, ItemLink } from '../../base';
 import { Wrapper, BackButton, Quote, SayingQuote } from './styles';
 
 export class Error404Page extends Component{

@@ -32,7 +32,6 @@ const ImgBlock = styled.div`
     left: 0;
     width: ${props => props.showSize ? "50px" : "70px"};
     height: ${props => props.showSize ? "50px" : "70px"};
-    background: #bababa;
 `;
 const InfoBlock = styled.div`
     float: left;

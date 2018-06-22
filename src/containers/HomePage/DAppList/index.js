@@ -4,7 +4,7 @@ import CardList from './CardList';
 import TopBar from './TopBar';
 
 import { Row, Col, Title } from '../../../base';
-import { Container } from './styles';
+import { Container, Line } from './styles';
 
 import { API } from '../../../service';
 
@@ -17,7 +17,8 @@ export default class DAppList extends Component{
             }],
             dappData: [],
             showCard: true,
-            platform: ""
+            platform: "",
+            isloading: true
         }
     }
     async componentDidMount(){
@@ -29,6 +30,7 @@ export default class DAppList extends Component{
             dappData: listData.results,
             platform: "All",
             page: 1,
+            isloading: false
         })
     }
     _changeShowCard = (value) => {
@@ -40,20 +42,26 @@ export default class DAppList extends Component{
     }
     _changePlatform = (platform) => {
         return async () => {
-            let listData = await API.getDappByPlatform(platform);
-
             this.setState({
-                platform,
-                dappData: listData.results,
-                page: 1,
+                isloading: true
             })
+            await API.getDappByPlatform(platform, this.setData);
         }
+    }
+    setData = (platform, data) => {
+        this.setState({
+            platform,
+            dappData: data,
+            page: 1,
+            isloading: false
+        })
     }
     render() {
         let { sideMenuData, dappData, showCard, platform } = this.state;
 
         return(
             <Container>
+                <Line w={this.state.isloading ? "80%" : "100%"}/>
                 <TopBar title="Blockchain" changeShowCard={this._changeShowCard} showCard={showCard}/>
                 <Row height="27px">
                     <Title color="#bababa" size="20px">platform</Title>
