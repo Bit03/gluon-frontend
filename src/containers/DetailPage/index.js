@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Span } from '../../base';
-// import { API } from '../../service';
+import { API } from '../../service';
+import ReactHighcharts from 'react-highcharts';
 import { About,
         Founder,
         Agency,
@@ -18,7 +19,8 @@ import { About,
         BlockEle,
         SocialLink,
         SocialName,
-        StatusItem } from './styles';
+        StatusItem,
+        ChartsBorder } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -46,7 +48,15 @@ export default class DetailPage extends Component{
             },{
                 id: "aboutInfo",
                 name: "相关新闻",
-            }]
+            }],
+            chartsData: [{
+                data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 295.6, 454.4]
+            },{
+                data: [29.9, 61.5, 106.4, 169.2, 144.0, 156.0, 135.6, 148.5, 286.4, 174.1, 395.6, 354.4]
+            }],
+            commitData: [],
+            noReflow: false,
+            name: ""
         }
         this.aboutTop = 0;
         this.founderTop = 0;
@@ -56,8 +66,27 @@ export default class DetailPage extends Component{
         this.bodyHeight = 0;
     }
     async componentDidMount() {
-        // let id = this.props.match.params.id;
-        // let result = await API.getDappData(id);
+        let login = this.props.location.state.login;
+        this.setState({
+            name: login
+        })
+        await API.getCommitData(login,(data) => {
+            let utcData = []
+            data.map((item) => {
+                utcData.push([item[0] * 1000, item[1]])
+            })
+            utcData.reverse();
+            console.log(utcData)
+            this.setState({
+                commitData: utcData
+            }, () => {
+                this.setState({
+                    noReflow: true
+                })
+                // this.pageInit();
+            })
+        });
+        
         this.pageInit();
     }
     conmponentDidUnmount() {
@@ -73,6 +102,7 @@ export default class DetailPage extends Component{
         })
         this.judgeTab();
         this.judgeRightSide();
+
         window.onscroll = () => {
             this.judgeTab()
         }
@@ -122,7 +152,27 @@ export default class DetailPage extends Component{
         return (
             <Container width="100%">
                 <Wrapper>
-                    <TopCharts></TopCharts>
+                    <TopCharts>
+                        {/* <ReactHighcharts
+                        neverReflow={this.state.noReflow}
+                        config={{
+                        title: {
+                            text: this.state.name
+                        },
+                        xAxis: {
+                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                        },
+                        series: this.state.chartsData,
+                        chart: {
+                            height: 440,
+                            borderRadius: 20,
+                        },
+                        credits:{
+                            enabled: false // 禁用版权信息
+                        }
+                        }}>
+                        </ReactHighcharts> */}
+                    </TopCharts>
                 </Wrapper>
                 <Container>
                     <Row flex={4} alignItems="flex-start" justifyContent="space-between">
@@ -152,7 +202,38 @@ export default class DetailPage extends Component{
                             </Agency>
                             <GithubData id="githubData">
                                 <Title>Github数据</Title>
-                                <div style={{ height: '300px'}}></div>
+                                <ChartsBorder>
+                                { this.state.commitData.length !== 0 ? <ReactHighcharts
+                                // isPureConfig={true}
+                                ref="chart"
+                                neverReflow={this.state.noReflow}
+                                config={{
+                                title: {
+                                    text: this.state.name
+                                },
+                                xAxis: {
+                                    type: 'datetime',
+                                    labels: {
+                                        rotation: -50,
+                                        align: 'right',
+                                        formatter: function() {
+                                            return new Date(this.value).toLocaleDateString().replace(/\//g, '-');
+                                        }
+                                    }
+                                },
+                                series: [{
+                                    data: this.state.commitData,
+                                    name: "commit"
+                                }],
+                                credits:{
+                                    enabled: false // 禁用版权信息
+                                },
+                                time: {
+                                    useUTC: false
+                                }
+                                }}>
+                                </ReactHighcharts> : <div>comming soon</div>}
+                                </ChartsBorder>
                             </GithubData>
                             <AboutInfo id="aboutInfo">
                                 <Title>相关新闻</Title>

@@ -24,11 +24,11 @@ const Wrapper = styled.div`
 const TopCharts = styled.div`
     width: 1200px;
     height: 450px;
-    border: 1px solid #bababa;
     background: #fff;
     margin: 0 auto;
     position: relative;
-    z-index: 10;
+    /* z-index: 10; */
+    box-shadow: 0 7px 20px -6px #EDEDED;
 `;
 const RightSide = styled.div`
     z-index: 10;
@@ -122,6 +122,13 @@ const StatusItem = styled.div`
         }
     }
 `;
+const ChartsBorder = styled.div`
+    border: 1px solid #EDEDED;
+    height: 400px;
+    font-size: 36px;
+    color: #545454;
+    /* border-radius: 3px; */
+`;
 export { 
     About,
     Founder,
@@ -140,4 +147,5 @@ export {
     BlockEle,
     SocialLink,
     SocialName,
-    StatusItem }
+    StatusItem,
+    ChartsBorder }

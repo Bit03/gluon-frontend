@@ -36,7 +36,12 @@ class FetchApi{
             origin = await fetch(URL.getDappDataByPlatform + platform);
         }
         let result = await origin.json();
-        cb(platform, result.results)
+        cb(platform, result)
+    }
+    getCommitData = async ( login, cb ) => {
+        let origin = await fetch(URL.getCommitData + login + '/commit/');
+        let result = await origin.json();
+        cb(result)
     }
 }
 
