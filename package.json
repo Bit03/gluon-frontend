@@ -1,7 +1,7 @@
 {
   "name": "gluon-frontend",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
     "@fortawesome/free-brands-svg-icons": "^5.1.0-11",
@@ -41,7 +41,9 @@
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.3.2",
     "react-highcharts": "^16.0.2",
+    "react-redux": "^5.0.7"
     "react-router-dom": "^4.2.2",
+    "redux": "^4.0.0",
     "resolve": "1.6.0",
     "style-loader": "0.19.0",
     "styled-components": "^3.3.2",
