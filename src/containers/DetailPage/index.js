@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Span } from '../../base';
-import { API } from '../../service';
+// import { API } from '../../service';
 import { About,
         Founder,
         Agency,
@@ -56,7 +56,7 @@ export default class DetailPage extends Component{
         this.bodyHeight = 0;
     }
     async componentDidMount() {
-        let id = this.props.match.params.id;
+        // let id = this.props.match.params.id;
         // let result = await API.getDappData(id);
         this.pageInit();
     }

@@ -1,15 +1,5 @@
 import styled from 'styled-components';
-import { keyframes } from 'styled-components';
 
-const lineWidthChange = keyframes`
-  from {
-    width: 0
-  }
-
-  to {
-    width: 100%;
-  }
-`;
 const Wrapper = styled.div`
     max-width: 1200px;
     margin: 0 auto;
@@ -45,21 +35,10 @@ const ItemIntro = styled.span`
     color: #BABABA;
 `;
 
-const Line = styled.div`
-    width: 0;
-    height: 1px;
-    background-color: #ededed;
-    animation: ${lineWidthChange} 1.6s ease;
-    animation-fill-mode: forwards;
-    margin-top: 50px;
-`;
-
-
 export {
     Wrapper,
     HotBottom,
     Item,
     ItemNum,
-    ItemIntro,
-    Line
+    ItemIntro
 }

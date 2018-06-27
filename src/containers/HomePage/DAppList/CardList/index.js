@@ -7,7 +7,7 @@ export default class CardList extends Component{
     renderDAppList = () => {
         let {data, showCard} = this.props;
         let Item = showCard ? ItemCard : ItemList;
-
+        let defaultImg = require('../../../../static/images/default-big-gray.png');
         return (
             <Wrapper column={!showCard}>
                 { data.map((item, index) => <Item key={item.id}>
@@ -19,7 +19,7 @@ export default class CardList extends Component{
                     }}>
                         <ImgBlock showSize={showCard}>
                             {/* { item.site.logo !== "" ? <img src={item.site.logo} alt="logo"/> : null} */}
-                            <img src={require('../../../../static/images/default-big-gray.png')} alt="logo"/>
+                            <img src={item.site && item.site.logo_url ? item.site.logo_url : defaultImg} alt="logo"/>
                         </ImgBlock>
                         <InfoBlock showSize={showCard}>
                             <ProjectName>{item.name}</ProjectName>

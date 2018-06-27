@@ -7,8 +7,7 @@ import {
     HotBottom,
     Item,
     ItemNum,
-    ItemIntro,
-    Line
+    ItemIntro
 } from './styles';
 
 export default class HotApp extends Component{
@@ -91,7 +90,6 @@ export default class HotApp extends Component{
                         </Item>
                     })}
                 </HotBottom>
-                <Line/>
             </Wrapper>
         )
     }

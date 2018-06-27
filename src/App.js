@@ -26,8 +26,8 @@ class App extends Component {
               <Header />
               <Switch>
                 <Route exact path="/" component={HomePage}/>
-                <Route path="/rank" component={RankPage}/>
-                <Route path="/detail/:id" component={DetailPage}/>
+                <Route exact path="/rank" component={RankPage}/>
+                <Route exact path="/detail/:id" component={DetailPage}/>
                 <Route path="*" component={Error404Page} />
               </Switch>
               <Footer title="DApp Rank"/>

@@ -28,7 +28,7 @@ class FetchApi{
 
         return result;
     }
-    getDappByPlatform = async ( platform ) => {
+    getDappByPlatform = async ( platform, cb ) => {
         let origin;
         if( platform === "All" ){
             origin = await fetch(URL.getDappData);
@@ -36,8 +36,7 @@ class FetchApi{
             origin = await fetch(URL.getDappDataByPlatform + platform);
         }
         let result = await origin.json();
-
-        return result;
+        cb(platform, result.results)
     }
 }
 
