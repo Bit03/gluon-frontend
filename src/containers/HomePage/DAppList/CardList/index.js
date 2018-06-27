@@ -10,11 +10,12 @@ export default class CardList extends Component{
         let defaultImg = require('../../../../static/images/default-big-gray.png');
         return (
             <Wrapper column={!showCard}>
-                { data.map((item, index) => <Item key={item.id}>
+                { data.map((item, index) => <Item key={index}>
                     <ItemLink to={{
                         pathname: "/detail/" + item.slug,
                         state: {
-                            slug: item.slug
+                            slug: item.slug,
+                            login: item.github && item.github.login ? item.github.login : "hello"
                         }
                     }}>
                         <ImgBlock showSize={showCard}>
