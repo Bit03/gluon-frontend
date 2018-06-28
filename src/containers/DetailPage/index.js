@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Span } from '../../base';
-import { API } from '../../service';
+// import { API } from '../../service';
 import ReactHighcharts from 'react-highcharts';
 import { About,
         Founder,
@@ -66,25 +66,59 @@ export default class DetailPage extends Component{
         this.bodyHeight = 0;
     }
     async componentDidMount() {
-        let login = this.props.location.state.login;
-        this.setState({
-            name: login
+        // let login = this.props.location.state.login;
+        // console.log(this.props)
+        // this.setState({
+        //     name: login
+        // })
+        
+        // await API.getCommitData(login,(data) => {
+        //     let utcData = []
+        //     data.map((item) => {
+        //         utcData.push([item[0] * 1000, item[1]])
+        //     })
+        //     utcData.reverse();
+        //     console.log(utcData)
+        //     this.setState({
+        //         commitData: utcData
+        //     }, () => {
+        //         this.setState({
+        //             noReflow: true
+        //         })
+        //         // this.pageInit();
+        //     })
+        // });
+        await fetch("https://api.dapprank.com/api/github/repos/ethereum/state/")
+        .then((res) => {
+            return res.json()
         })
-        await API.getCommitData(login,(data) => {
-            let utcData = []
-            data.map((item) => {
-                utcData.push([item[0] * 1000, item[1]])
-            })
-            utcData.reverse();
-            console.log(utcData)
-            this.setState({
-                commitData: utcData
-            }, () => {
-                this.setState({
-                    noReflow: true
+        .then((data) => {
+            let watchData = [];
+            let starData = [];
+            let forkData = [];
+
+            // (data) => {
+                let utcData = []
+                data.map((item) => {
+                    let time = item[0] * 1000;
+                    watchData.push([time, item[1]]);
+                    starData.push([time, item[2]]);
+                    forkData.push([time, item[3]]);
+                    return true;
                 })
-                // this.pageInit();
-            })
+                utcData.reverse();
+                console.log(utcData)
+                this.setState({
+                    watchData,
+                    starData,
+                    forkData
+                }, () => {
+                    this.setState({
+                        noReflow: true
+                    })
+                    // this.pageInit();
+                })
+            // }
         });
         
         this.pageInit();
@@ -203,7 +237,7 @@ export default class DetailPage extends Component{
                             <GithubData id="githubData">
                                 <Title>Github数据</Title>
                                 <ChartsBorder>
-                                { this.state.commitData.length !== 0 ? <ReactHighcharts
+                                { this.state.commitData.length === 0 ? <ReactHighcharts
                                 // isPureConfig={true}
                                 ref="chart"
                                 neverReflow={this.state.noReflow}
@@ -222,8 +256,14 @@ export default class DetailPage extends Component{
                                     }
                                 },
                                 series: [{
-                                    data: this.state.commitData,
-                                    name: "commit"
+                                    data: this.state.watchData,
+                                    name: "watch"
+                                },{
+                                    data: this.state.starData,
+                                    name: "star"
+                                },{
+                                    data: this.state.forkData,
+                                    name: "fork"
                                 }],
                                 credits:{
                                     enabled: false // 禁用版权信息

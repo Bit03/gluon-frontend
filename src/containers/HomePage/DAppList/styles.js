@@ -25,6 +25,7 @@ const LoadMore = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    cursor: pointer;
 `;
 
 export {

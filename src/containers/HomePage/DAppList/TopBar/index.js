@@ -15,14 +15,14 @@ export default class TopBar extends Component{
                     <FontAwesomeIcon
                         icon={faThLarge}
                         size="lg"
-                        color={this.props.showCard ? "#3b3b3b" : "#ededed"}
+                        color={this.props.isCard ? "#3b3b3b" : "#ededed"}
                         onClick={this.props.changeShowCard(true)}/>
                     </Btn>
                     <Btn>
                     <FontAwesomeIcon
                         icon={faAlignJustify}
                         size="lg"
-                        color={this.props.showCard ? "#ededed" : "#3b3b3b"}
+                        color={this.props.isCard ? "#ededed" : "#3b3b3b"}
                         onClick={this.props.changeShowCard(false)}/>
                     </Btn>
                 </BtnGroup>
