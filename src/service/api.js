@@ -11,7 +11,7 @@ import URL from './url';
 // }
 class FetchApi{
     getAllDappData = async ( ) => {
-        let origin = await fetch(URL.getDappData);
+        let origin = await fetch(URL.getDappData + '?size=27');
         let result = await origin.json();
 
         return result;
@@ -42,6 +42,12 @@ class FetchApi{
         let origin = await fetch(URL.getCommitData + login + '/commit/');
         let result = await origin.json();
         cb(result)
+    }
+    getPriceData = async ( symbolArray ) => {
+        let origin = await fetch(URL.getPriceData + symbolArray);
+        let result = await origin.json();
+
+        return result;
     }
 }
 

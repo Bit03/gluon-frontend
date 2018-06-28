@@ -16,7 +16,7 @@ export default class DAppList extends Component{
                 platform: "All"
             }],
             dappData: [],
-            showCard: true,
+            isCard: true,
             platform: "",
             isloading: true,
             next: ""
@@ -25,7 +25,27 @@ export default class DAppList extends Component{
     async componentDidMount(){
         let sideData = await API.getDappPlatform();
         let listData = await API.getAllDappData();
-
+        console.log(listData)
+        let symbols = [];
+        listData.results.map((item, index) => {
+            let param = 'symbols[' + index + ']=' + item.symbol;
+            symbols.push(param);
+            return true;
+        })
+        let priceData = await API.getPriceData(symbols.join('&'));
+        console.log(priceData)
+        listData.results.map((item) => {
+            priceData.data.map(priceItem => {
+                if(priceItem.symbol === item.symbol){
+                    item.price_usd = priceItem.attach.price_usd;
+                    item.sale_price_usd = priceItem.attach.sale_price_usd;
+                    item.usd_raised = priceItem.attach.usd_raised;
+                }
+                return true;
+            })
+            return true;
+        })
+        console.log(listData)
         this.setState({
             sideMenuData: this.state.sideMenuData.concat(sideData.results),
             dappData: listData.results,
@@ -38,7 +58,7 @@ export default class DAppList extends Component{
     _changeShowCard = (value) => {
         return () => {
             this.setState({
-                showCard: value
+                isCard: value
             })
         }
     }
@@ -71,12 +91,12 @@ export default class DAppList extends Component{
         })
     }
     render() {
-        let { sideMenuData, dappData, showCard, platform } = this.state;
+        let { sideMenuData, dappData, isCard, platform } = this.state;
 
         return(
             <Container>
                 <Line w={this.state.isloading ? "80%" : "100%"}/>
-                <TopBar title="Blockchain" changeShowCard={this._changeShowCard} showCard={showCard}/>
+                <TopBar title="Blockchain" changeShowCard={this._changeShowCard} isCard={isCard}/>
                 <Row height="27px">
                     <Title color="#bababa" size="20px">platform</Title>
                 </Row>
@@ -85,7 +105,7 @@ export default class DAppList extends Component{
                         <SideMenu data={sideMenuData} changePlatform={this._changePlatform} platform={platform}/>
                     </Col>
                     <Col flex={3}>
-                        <CardList data={dappData} showCard={showCard}/>
+                        <CardList data={dappData} isCard={isCard}/>
                         { this.state.next ? <LoadMore onClick={this.loadMoreData}>加载更多...</LoadMore> : null}
                     </Col>
                 </Row>

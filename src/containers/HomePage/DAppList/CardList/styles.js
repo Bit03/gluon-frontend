@@ -1,64 +1,70 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.ul`
-    flex: 1;
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around; */
     display: block;
-    flex-direction: ${props => props.column ? "column" : null};
 `;
-const ItemList = styled.li`
+const ItemLink = styled(Link)`
+    align-items: ${ p => p.isCard ? null : "center"};
+
+    display: flex;
+    overflow: hidden;
+`;
+const ItemWrapper = styled.li`
+    width: ${ p => p.isCard ? "280px" : "880px"};   
+    float: ${ p => p.isCard ? "left" : null};
+
+    margin-left: 20px;
+    margin-bottom: 40px;
     display: block;
-    flex: 1;
-    height: 110px;
-    background: #FFFFFF;
-    padding: 20px;
-    border-bottom: 1px solid #ededed;
-`;
-const ItemCard = styled.li`
-    display: inline-block;
-    width: 280px;
-    height: 162px;
-    background: #FFFFFF;
-    box-shadow: 0 7px 20px 1px #E6EAF2;
+    height: 160px;
+    padding: 25px;
+    border: 1px solid rgba(51,51,51,.05);
     border-radius: 8px;
-    margin: 20px 20px 0 0;
-    padding: 20px;
+    cursor: pointer;
+    :hover{
+        box-shadow: 0 7px 20px 1px #E6EAF2;
+    }
+    transition: box-shadow ease .5s;
 `;
-const ImgBlock = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: ${props => props.showSize ? "50px" : "70px"};
-    height: ${props => props.showSize ? "50px" : "70px"};
+const ImageWrapper = styled.div`
+    width: ${ p => p.isCard ? "50px" : "70px"};
+    height: ${ p => p.isCard ? "50px" : "70px"};
 `;
-const InfoBlock = styled.div`
+const InfoWrapper = styled.div`
+    width: ${ p => p.isCard ? "170px" : "400px"};
+    height: ${ p => p.isCard ? "110px" : "75px"};
+    margin-left: ${ p => p.isCard ? "15px" : "20px"};
+`;
+const PriceWrapper = styled.div`
+    width: 350px;
+    height: 110px;
+    margin-left: 90px;
+`;
+const PriceItem = styled.div`
+    width: 150px;
+    height: 55px;
     float: left;
-    margin-left: ${props => props.showSize ? "60px" : "80px"};
+    text-align: left;
 `;
-const ProjectName = styled.span`
-    display: block;
-    font-size: 22px;
-    color: #4A4A4A;
-`;
-const ProjectDesc = styled.span`
-    /* display: block; */
-    margin-top: ${props => props.showSize ? "10px" : null};
+const ItemDesc = styled.span`
+    width: 100%;
+    margin-top: 6px;
     font-size: 14px;
     color: #4A4A4A;
     display: -webkit-box;
-    -webkit-line-clamp: ${props => props.showSize ? 4 : 2};
+    -webkit-line-clamp: ${props => props.isCard ? 4 : 2};
     -webkit-box-orient: vertical;
     overflow: hidden;
 `;
 
 export {
-    ItemList,
-    ItemCard,
     Wrapper,
-    ImgBlock,
-    InfoBlock,
-    ProjectDesc,
-    ProjectName
+    ItemWrapper,
+    ItemLink,
+    ImageWrapper,
+    InfoWrapper,
+    PriceWrapper,
+    PriceItem,
+    ItemDesc
 }

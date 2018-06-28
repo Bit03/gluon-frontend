@@ -124,7 +124,7 @@ const StatusItem = styled.div`
 `;
 const ChartsBorder = styled.div`
     border: 1px solid #EDEDED;
-    height: 400px;
+    /* height: 400px; */
     font-size: 36px;
     color: #545454;
     /* border-radius: 3px; */
