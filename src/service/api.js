@@ -11,19 +11,25 @@ import URL from './url';
 // }
 class FetchApi{
     getAllDappData = async ( ) => {
-        let origin = await fetch(URL.getDappData + '?size=27');
+        let origin = await fetch(URL.getDappData + '?size=27',{
+            credentials: "include"
+          });
         let result = await origin.json();
 
         return result;
     }
     getDappData = async ( slug ) => {
-        let origin = await fetch(URL.getDappData + slug);
+        let origin = await fetch(URL.getDappData + slug,{
+            credentials: "include"
+          });
         let result = await origin.json();
 
         return result;
     }
     getDappPlatform = async () => {
-        let origin = await fetch(URL.getDappPlatform);
+        let origin = await fetch(URL.getDappPlatform,{
+            credentials: "include"
+          });
         let result = await origin.json();
 
         return result;
@@ -31,20 +37,28 @@ class FetchApi{
     getDappByPlatform = async ( platform, cb ) => {
         let origin;
         if( platform === "All" ){
-            origin = await fetch(URL.getDappData);
+            origin = await fetch(URL.getDappData,{
+                credentials: "include"
+              });
         }else{
-            origin = await fetch(URL.getDappDataByPlatform + platform);
+            origin = await fetch(URL.getDappDataByPlatform + platform,{
+                credentials: "include"
+              });
         }
         let result = await origin.json();
         cb(platform, result)
     }
     getCommitData = async ( login, cb ) => {
-        let origin = await fetch(URL.getCommitData + login + '/commit/');
+        let origin = await fetch(URL.getCommitData + login + '/commit/',{
+            credentials: "include"
+          });
         let result = await origin.json();
         cb(result)
     }
     getPriceData = async ( symbolArray ) => {
-        let origin = await fetch(URL.getPriceData + symbolArray);
+        let origin = await fetch(URL.getPriceData + symbolArray,{
+            credentials: "include"
+          });
         let result = await origin.json();
 
         return result;

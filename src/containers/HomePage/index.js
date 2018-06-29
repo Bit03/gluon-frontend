@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HotDApp from './HotDApp';
+// import HotDApp from './HotDApp';
 import DAppList from './DAppList';
 import styled from 'styled-components';
 
@@ -12,7 +12,7 @@ export default class HomePage extends Component{
     render(){
         return (
             <Container>
-                <HotDApp />
+                {/* <HotDApp /> */}
                 <DAppList />
             </Container>
         )

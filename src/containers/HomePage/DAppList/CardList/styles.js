@@ -13,12 +13,12 @@ const ItemLink = styled(Link)`
 const ItemWrapper = styled.li`
     width: ${ p => p.isCard ? "280px" : "880px"};   
     float: ${ p => p.isCard ? "left" : null};
+    padding: ${ p => p.isCard ? "24px" : "40px"};
+    height: ${ p => p.isCard ? "162px" : "154px"};
 
     margin-left: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     display: block;
-    height: 160px;
-    padding: 25px;
     border: 1px solid rgba(51,51,51,.05);
     border-radius: 8px;
     cursor: pointer;
@@ -28,24 +28,26 @@ const ItemWrapper = styled.li`
     transition: box-shadow ease .5s;
 `;
 const ImageWrapper = styled.div`
-    width: ${ p => p.isCard ? "50px" : "70px"};
-    height: ${ p => p.isCard ? "50px" : "70px"};
+    width: ${ p => p.isCard ? "55px" : "75px"};
+    height: ${ p => p.isCard ? "55px" : "75px"};
+    border-radius: ${ p => p.isCard ? "4px" : "8px"};
+
+    overflow: hidden;
 `;
 const InfoWrapper = styled.div`
-    width: ${ p => p.isCard ? "170px" : "400px"};
+    width: ${ p => p.isCard ? "155px" : "200px"};
     height: ${ p => p.isCard ? "110px" : "75px"};
-    margin-left: ${ p => p.isCard ? "15px" : "20px"};
+    
+    margin-left: 20px;
 `;
 const PriceWrapper = styled.div`
-    width: 350px;
-    height: 110px;
-    margin-left: 90px;
+    width: 440px;
+    margin-left: 63px;
 `;
 const PriceItem = styled.div`
-    width: 150px;
-    height: 55px;
+    width: 110px;
     float: left;
-    text-align: left;
+    text-align: center;
 `;
 const ItemDesc = styled.span`
     width: 100%;

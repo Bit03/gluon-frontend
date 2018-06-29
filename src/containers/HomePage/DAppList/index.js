@@ -3,9 +3,8 @@ import SideMenu from './SideMenu';
 import CardList from './CardList';
 import TopBar from './TopBar';
 
-import { Row, Col, Title } from '../../../base';
-import { Container, Line, LoadMore } from './styles';
-
+import { Row, Col } from '../../../base';
+import { Container, Line } from './styles';
 import { API } from '../../../service';
 
 export default class DAppList extends Component{
@@ -96,17 +95,13 @@ export default class DAppList extends Component{
         return(
             <Container>
                 <Line w={this.state.isloading ? "80%" : "100%"}/>
-                <TopBar title="Blockchain" changeShowCard={this._changeShowCard} isCard={isCard}/>
-                <Row height="27px">
-                    <Title color="#bababa" size="20px">platform</Title>
-                </Row>
+                <TopBar changeShowCard={this._changeShowCard} isCard={isCard}/>
                 <Row alignItems="flex-start">
                     <Col flex={1}>
                         <SideMenu data={sideMenuData} changePlatform={this._changePlatform} platform={platform}/>
                     </Col>
                     <Col flex={3}>
                         <CardList data={dappData} isCard={isCard}/>
-                        { this.state.next ? <LoadMore onClick={this.loadMoreData}>加载更多...</LoadMore> : null}
                     </Col>
                 </Row>
             </Container>

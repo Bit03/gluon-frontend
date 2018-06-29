@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Text = styled.span`
-    color: ${p => p.color ? p.color : null};
-    font-size: ${p => p.size ? p.size + 'px' : null};
+    color: ${p => p.color ? p.color : '#666666'};
+    font-size: ${p => p.size ? p.size + 'px' : '14px'};
     font-family: ${p => p.family ? p.family : null};
     font-weight: ${p => p.bold ? 'bold' : null};
 `;
