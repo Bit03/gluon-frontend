@@ -16,20 +16,8 @@ const Line = styled.div`
     transition: all linear 0.4s;
     margin: 0 auto;
 `;
-const LoadMore = styled.div`
-    width: 100%;
-    height: 50px;
-    font-size: 24px;
-    color: #545454;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    cursor: pointer;
-`;
 
 export {
     Container,
-    Line,
-    LoadMore
+    Line
 }

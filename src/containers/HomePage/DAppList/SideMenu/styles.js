@@ -6,13 +6,12 @@ const Wrapper = styled.ul`
     flex-direction: column;
     justify-content: flex-start;
     position: relative;
-    /* padding: 20px 0 0 50px; */
     top: 20px;
     left: 50px;
     ::before {
         content: '';
         display: block;
-        height: 80%;
+        height: 90%;
         width: 1px;
         position: absolute;
         top: 50%;
@@ -23,10 +22,8 @@ const Wrapper = styled.ul`
 `;
 
 const ItemList = styled.li`
-    font-size: 14px;
-    line-height: 17px;
-    color: #3B3B3B;
     cursor: pointer;
+    margin-bottom: 10px;
 `;
 
 export {

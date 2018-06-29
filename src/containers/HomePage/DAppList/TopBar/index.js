@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import { Title, BtnGroup, Btn } from './styles';
+import { BtnGroup, Btn } from './styles';
 import { Row } from '../../../../base';
+import { Heading } from '@base-style'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThLarge, faAlignJustify } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,7 +10,7 @@ export default class TopBar extends Component{
     render() {
         return (
             <Row height="70px">
-                <Title>{this.props.title}</Title>
+                <Heading.h3>区块链平台</Heading.h3>
                 <BtnGroup>
                     <Btn>
                     <FontAwesomeIcon

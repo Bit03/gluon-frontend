@@ -25,20 +25,20 @@ const Item = function(props) {
                 {
                     props.isCard ? null : <PriceWrapper>
                         <PriceItem>
-                            <Heading.h3 color="#3b3b3b" mbottom="5">销售价格</Heading.h3>
-                            <Text size="20" color="#3b3b3b" bold>{props.data.price_usd ? '$ ' + props.data.price_usd : '-'}</Text>
+                            <Text.block mbottom="5">代币</Text.block>
+                            <Text.block size="20" color="#3b3b3b" bold>{props.data.symbol ? props.data.symbol : '-'}</Text.block>
                         </PriceItem>
                         <PriceItem>
-                            <Heading.h3 color="#3b3b3b" mbottom="5">符号</Heading.h3>
-                            <Text size="20" color="#3b3b3b" bold>{props.data.symbol ? props.data.symbol : '-'}</Text>
+                            <Text.block mbottom="5">初始价</Text.block>
+                            <Text.block size="20" color="#3b3b3b" bold>{props.data.price_usd ? '$ ' + props.data.price_usd.toFixed(4) : '-'}</Text.block>
                         </PriceItem>
                         <PriceItem>
-                            <Heading.h3 color="#3b3b3b" mbottom="5">时价</Heading.h3>
-                            <Text size="20" color="#3b3b3b" bold>{props.data.sale_price_usd ? '$ ' + props.data.sale_price_usd : '-'}</Text>
+                            <Text.block mbottom="5">销售价格</Text.block>
+                            <Text.block size="20" color="#3b3b3b" bold>{props.data.sale_price_usd ? '$ ' + props.data.sale_price_usd.toFixed(4) : '-'}</Text.block>
                         </PriceItem>
                         <PriceItem>
-                            <Heading.h3 color="#3b3b3b" mbottom="5">收益率</Heading.h3>
-                            <Text size="20" color="#3b3b3b" bold>{props.data.usd_raised ? props.data.usd_raised + ' X' : '-'}</Text>
+                            <Text.block mbottom="5">回报率</Text.block>
+                            <Text.block size="20" color="#3b3b3b" bold>{props.data.price_usd && props.data.sale_price_usd && props.data.price_usd !== 0 ?  (props.data.sale_price_usd/props.data.price_usd).toFixed(4) + ' X' : '-'}</Text.block>
                         </PriceItem>
                     </PriceWrapper>
                 }
