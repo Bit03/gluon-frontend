@@ -11,25 +11,23 @@ import URL from './url';
 // }
 class FetchApi{
     getAllDappData = async ( ) => {
-        let origin = await fetch(URL.getDappData + '?size=27',{
+        let origin = await fetch(URL.getDappData + '?size=27', {
             credentials: "include"
-          });
+        });
         let result = await origin.json();
 
         return result;
     }
     getDappData = async ( slug ) => {
-        let origin = await fetch(URL.getDappData + slug,{
+        let origin = await fetch(URL.getDappData + slug, {
             credentials: "include"
-          });
+        });
         let result = await origin.json();
 
         return result;
     }
     getDappPlatform = async () => {
-        let origin = await fetch(URL.getDappPlatform,{
-            credentials: "include"
-          });
+        let origin = await fetch(URL.getDappPlatform);
         let result = await origin.json();
 
         return result;
@@ -37,28 +35,20 @@ class FetchApi{
     getDappByPlatform = async ( platform, cb ) => {
         let origin;
         if( platform === "All" ){
-            origin = await fetch(URL.getDappData,{
-                credentials: "include"
-              });
+            origin = await fetch(URL.getDappData);
         }else{
-            origin = await fetch(URL.getDappDataByPlatform + platform,{
-                credentials: "include"
-              });
+            origin = await fetch(URL.getDappDataByPlatform + platform);
         }
         let result = await origin.json();
         cb(platform, result)
     }
     getCommitData = async ( login, cb ) => {
-        let origin = await fetch(URL.getCommitData + login + '/commit/',{
-            credentials: "include"
-          });
+        let origin = await fetch(URL.getCommitData + login + '/commit/');
         let result = await origin.json();
         cb(result)
     }
     getPriceData = async ( symbolArray ) => {
-        let origin = await fetch(URL.getPriceData + symbolArray,{
-            credentials: "include"
-          });
+        let origin = await fetch(URL.getPriceData + symbolArray);
         let result = await origin.json();
 
         return result;
