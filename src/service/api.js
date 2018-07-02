@@ -10,14 +10,6 @@ import URL from './url';
 //     })
 // }
 class FetchApi{
-    getAllDappData = async ( ) => {
-        let origin = await fetch(URL.getDappData + '?size=27', {
-            credentials: "include"
-        });
-        let result = await origin.json();
-
-        return result;
-    }
     getDappData = async ( slug ) => {
         let origin = await fetch(URL.getDappData + slug, {
             credentials: "include"
@@ -32,7 +24,7 @@ class FetchApi{
 
         return result;
     }
-    getDappByPlatform = async ( platform, cb ) => {
+    getDappByPlatform = async ( platform) => {
         let origin;
         if( platform === "All" ){
             origin = await fetch(URL.getDappData);
@@ -40,7 +32,7 @@ class FetchApi{
             origin = await fetch(URL.getDappDataByPlatform + platform);
         }
         let result = await origin.json();
-        cb(platform, result)
+        return result;
     }
     getCommitData = async ( login, cb ) => {
         let origin = await fetch(URL.getCommitData + login + '/commit/');
@@ -49,6 +41,20 @@ class FetchApi{
     }
     getPriceData = async ( symbolArray ) => {
         let origin = await fetch(URL.getPriceData + symbolArray);
+        let result = await origin.json();
+
+        return result;
+    }
+    getPageData = async ( platform, page ) => {
+        let params;
+        if(platform === "All"){
+            params = `&page=${page}`
+        }else{
+            params = `&platform=${platform}&page=${page}`
+        }
+        let origin = await fetch(URL.getDappData + params, {
+            credentials: "include"
+        });
         let result = await origin.json();
 
         return result;

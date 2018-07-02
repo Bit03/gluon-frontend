@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 
 const Wrapper = styled.ul`
     display: block;
+    :after{
+        content: "";
+        display: block;
+        width: 0;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
 `;
 const ItemLink = styled(Link)`
     align-items: ${ p => p.isCard ? null : "center"};

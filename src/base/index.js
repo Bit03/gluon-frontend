@@ -32,6 +32,7 @@ const Row = styled.div`
 
 const Col = styled.div`
     flex: ${props => props.flex ? props.flex : 1};
+    flex-direction: ${props => props.direction ? props.direction : null};
     position: relative;
 `;
 

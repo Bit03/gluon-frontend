@@ -20,5 +20,13 @@ Heading.h4 = styled.h4`
     color: ${p => p.color ? p.color : '#3b3b3b'};
     font-size: ${p => p.size ? p.size : "16px"};
 `;
+Heading.item = styled.h2`
+    font-size: 20px;
+    color: #3B3B3B;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+`;
 
 export default Heading;
