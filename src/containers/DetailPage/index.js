@@ -6,7 +6,6 @@ import { Loading, Heading, Text, Row, Col, Container, FlexBox, Base, Btn } from 
 import { About,
     Founder,
     Agency,
-    GithubData,
     AboutInfo,
     Website,
     SocialAccount,
@@ -51,7 +50,7 @@ export default class DetailPage extends Component{
         let detailData = await API.getDetailData(slug);
         let aboutNews = await API.getSearchData(detailData.name);
         aboutNews = aboutNews.results.slice(0, 3);
-        console.log(aboutNews)
+        // console.log(aboutNews)
 
         this.setState({
             detailData,

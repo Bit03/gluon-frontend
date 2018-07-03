@@ -61,26 +61,7 @@ const StatusItem = styled.div`
         }
     }
 `;
-const EditBtn = styled.a`
-    border: 1px solid #bababa;
-    width: 150px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-`;
 
-const ImageWrapper = styled.div`
-    width: 70px;
-    height: 70px;
-    overflow: hidden;
-`;
-const InfoWrapper = styled.div`   
-    width: 400px;
-    height: 100px; 
-    margin-left: 20px;
-`;
 const ItemDesc = styled.span`
     width: 100%;
     margin-top: 6px;
