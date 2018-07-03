@@ -9,24 +9,20 @@ const Item = function(props) {
                 isCard={props.isCard}
                 target="_blank"
                 to={{
-                    pathname: "/detail/" + props.data.slug,
-                    state: {
-                        slug: props.data.slug,
-                        login: props.data.github && props.data.github.login ? props.data.github.login : ""
-                    }
+                    pathname: "/detail/" + props.data.slug
                 }}>
                 <ImageWrapper isCard={props.isCard}>
                     <img src={props.img} alt="logo"/>
                 </ImageWrapper>
                 <InfoWrapper isCard={props.isCard}>
-                    <Heading.h2 color="#3b3b3b">{props.data.name}</Heading.h2>
+                    <Heading.item>{props.data.name}</Heading.item>
                     <ItemDesc isCard={props.isCard}>{props.data.description_cn ? props.data.description_cn : props.data.description }</ItemDesc>
                 </InfoWrapper>
                 {
                     props.isCard ? null : <PriceWrapper>
                         <PriceItem>
                             <Text.block mbottom="5">代币</Text.block>
-                            <Text.block size="20" color="#3b3b3b" bold>{props.data.symbol ? props.data.symbol : '-'}</Text.block>
+                            <Text.item>{props.data.symbol ? props.data.symbol : '-'}</Text.item>
                         </PriceItem>
                         <PriceItem>
                             <Text.block mbottom="5">初始价</Text.block>

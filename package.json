@@ -103,5 +103,11 @@
   },
   "devDependencies": {
     "webpack-bundle-tracker": "^0.3.0"
+  },
+  "proxy": {
+    "/api/*": {
+      "target": "https://dapprank.com",
+      "changeOrigin": true
+    }
   }
 }

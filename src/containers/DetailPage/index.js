@@ -29,7 +29,7 @@ export default class DetailPage extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            detailData: [],
+            detailData: null,
             activeTab: "about",
             fixed: false,
             rightSide: 0,
@@ -66,62 +66,55 @@ export default class DetailPage extends Component{
         this.bodyHeight = 0;
     }
     async componentDidMount() {
-        // let login = this.props.location.state.login;
-        // console.log(this.props)
+        // let login = this.props.l;
+        // console.log(this.props.match.params.slug)
+        this.pageInit();
+        let slug = this.props.match.params.slug;
+        await fetch(`/api/dapps/${slug}/`)
+        .then((res) => res.json())
+        .then((res) => {
+            // console.log(res)
+            // console.log(res.github.html_url)
+            this.setState({
+                detailData: res
+            })
+        })
         // this.setState({
         //     name: login
         // })
         
-        // await API.getCommitData(login,(data) => {
-        //     let utcData = []
-        //     data.map((item) => {
-        //         utcData.push([item[0] * 1000, item[1]])
-        //     })
-        //     utcData.reverse();
-        //     console.log(utcData)
-        //     this.setState({
-        //         commitData: utcData
-        //     }, () => {
-        //         this.setState({
-        //             noReflow: true
-        //         })
-        //         // this.pageInit();
-        //     })
-        // });
-        await fetch("https://api.dapprank.com/api/github/repos/ethereum/state/")
-        .then((res) => {
-            return res.json()
-        })
-        .then((data) => {
-            let watchData = [];
-            let starData = [];
-            let forkData = [];
+        // await fetch("https://api.dapprank.com/api/github/repos/ethereum/state/")
+        // .then((res) => {
+        //     return res.json()
+        // })
+        // .then((data) => {
+        //     let watchData = [];
+        //     let starData = [];
+        //     let forkData = [];
 
-            // (data) => {
-                let utcData = []
-                data.map((item) => {
-                    let time = item[0] * 1000;
-                    watchData.push([time, item[1]]);
-                    starData.push([time, item[2]]);
-                    forkData.push([time, item[3]]);
-                    return true;
-                })
-                utcData.reverse();
-                console.log(utcData)
-                this.setState({
-                    watchData,
-                    starData,
-                    forkData
-                }, () => {
-                    this.setState({
-                        noReflow: true
-                    })
-                    // this.pageInit();
-                })
-            // }
-        });
-        
-        this.pageInit();
+        //     // (data) => {
+        //         let utcData = []
+        //         data.map((item) => {
+        //             let time = item[0] * 1000;
+        //             watchData.push([time, item[1]]);
+        //             starData.push([time, item[2]]);
+        //             forkData.push([time, item[3]]);
+        //             return true;
+        //         })
+        //         utcData.reverse();
+        //         console.log(utcData)
+        //         this.setState({
+        //             watchData,
+        //             starData,
+        //             forkData
+        //         }, () => {
+        //             this.setState({
+        //                 noReflow: true
+        //             })
+        //             // this.pageInit();
+        //         })
+        //     // }
+        // });
     }
     conmponentDidUnmount() {
         window.onresize = null;
@@ -183,6 +176,17 @@ export default class DetailPage extends Component{
         }
     }
     render(){
+        let { detailData } = this.state;
+        console.log(detailData)
+        // console.log(detailData.github.html_url)
+        let github = detailData ? detailData.github.html_url : null;
+        let twitter = detailData ? (detailData.social.twitter === "" ? null : detailData.social.twitter): null;
+        let facebook = detailData ? (detailData.social.facebook === "" ? null : detailData.social.facebook): null;
+        let linkedin = detailData ? (detailData.social.linkedin === "" ? null : detailData.social.linkedin): null;
+        let site = detailData ? (detailData.site ? detailData.site.url : null) : null;
+        let status = detailData ? detailData.status : null;
+        let ico = detailData ? detailData.ico_status : null;
+
         return (
             <Container width="100%">
                 <Wrapper>
@@ -206,6 +210,7 @@ export default class DetailPage extends Component{
                         }
                         }}>
                         </ReactHighcharts> */}
+                        {detailData ? detailData.name : null}
                     </TopCharts>
                 </Wrapper>
                 <Container>
@@ -283,39 +288,39 @@ export default class DetailPage extends Component{
                         <Col>
                             <RightSide id="rightSide" fixed={this.state.fixed} left={this.state.rightSide}>
                                 <Website>
-                                    <SocialLink href="#123" target="_blank">
-                                        <FontAwesomeIcon icon={faLink} size="lg" color="#bababa"/>
+                                    <SocialLink href={site?site:"#notfound"} target="_blank">
+                                        <FontAwesomeIcon icon={faLink} size="lg" color={site?"#0056ff":"#bababa"}/>
                                         <SocialName>
                                             网站 <br/>
                                         </SocialName>
                                     </SocialLink>
                                 </Website>
                                 <SocialAccount>
-                                    <SocialLink href="#123" target="_blank">
-                                        <FontAwesomeIcon icon={faGithub} size="lg" color="#0056ff"/>
+                                    <SocialLink href={github?github:"#notfound"} disabled={github} target="_blank">
+                                        <FontAwesomeIcon icon={faGithub} size="lg" color={github?"#0056ff": "#bababa"}/>
                                         <SocialName>GitHub</SocialName>
                                     </SocialLink>
-                                    <SocialLink href="#123" target="_blank">
-                                        <FontAwesomeIcon icon={faTwitter} size="lg" color="#0056ff"/>
+                                    <SocialLink href={twitter!==""?twitter:"#notfound"} target="_blank">
+                                        <FontAwesomeIcon icon={faTwitter} size="lg" color={twitter?"#0056ff": "#bababa"}/>
                                         <SocialName>推特</SocialName>
                                     </SocialLink>
-                                    <SocialLink href="#123" target="_blank">
-                                        <FontAwesomeIcon icon={faFacebook} size="lg" color="#0056ff"/>
+                                    <SocialLink href={facebook!==""?facebook:"#notfound"} target="_blank">
+                                        <FontAwesomeIcon icon={faFacebook} size="lg" color={facebook?"#0056ff": "#bababa"}/>
                                         <SocialName>脸书</SocialName>
                                     </SocialLink>
-                                    <SocialLink href="#123" target="_blank">
-                                        <FontAwesomeIcon icon={faLinkedin} size="lg" color="#0056ff"/>
+                                    <SocialLink href={linkedin!==""?linkedin:"#notfound"} target="_blank">
+                                        <FontAwesomeIcon icon={faLinkedin} size="lg" color={linkedin?"#0056ff": "#bababa"}/>
                                         <SocialName>领英</SocialName>
                                     </SocialLink>
                                 </SocialAccount>
                                 <Status>
                                     <StatusItem>
-                                        <Span>Status quo</Span>
-                                        <Span>WIP</Span>
+                                        <Span>Status</Span>
+                                        <Span>{status ? status : "-"}</Span>
                                     </StatusItem>
                                     <StatusItem>
                                         <Span>ICO</Span>
-                                        <Span>Completed</Span>
+                                        <Span>{ico ? ico : "-"}</Span>
                                     </StatusItem>
                                 </Status>
                             </RightSide>

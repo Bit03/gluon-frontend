@@ -12,5 +12,15 @@ Text.block = Text.extend`
     display: block;
     margin-top: ${p => p.mtop ? p.mtop + 'px' : null};
 `;
+Text.item = Text.extend`
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+    color: #3B3B3B;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+`;
 
 export default Text;
