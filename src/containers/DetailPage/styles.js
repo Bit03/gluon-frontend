@@ -1,12 +1,7 @@
 import styled from 'styled-components';
 
-const Title = styled.h3`
-    font-size: 28px;
-    color: #4A4A4A;
-    padding: 10px 0;
-`;
 const baseLeftSide = styled.div`
-    width: 850px;
+    width: 100%;
 `;
 const About = baseLeftSide.extend``;
 const Founder = baseLeftSide.extend``;
@@ -16,27 +11,7 @@ const AboutInfo = baseLeftSide.extend`
     /* position: ${props => props.fixed ? "fixed" : null};
     top: 20px; */
 `;
-const Wrapper = styled.div`
-    height: 295px;
-    background-image: linear-gradient(90deg, #63E0D0 0%, #249CFF 100%, #8455D8 100%);
-    margin-bottom: 175px;
-`;
-const TopCharts = styled.div`
-    width: 1200px;
-    height: 450px;
-    background: #fff;
-    margin: 0 auto;
-    position: relative;
-    /* z-index: 10; */
-    box-shadow: 0 7px 20px -6px #EDEDED;
-`;
-const RightSide = styled.div`
-    z-index: 10;
-    width: 330px;
-    position: ${props => props.fixed ? "fixed" : "absolute"};
-    left: ${props => props.fixed ? props.left + "px" : "20px"};
-    top: ${props => props.fixed ? 0 : 0};
-`;
+
 const borderBase = styled.div`
     width: 100%;
     margin-top: 20px;
@@ -69,43 +44,7 @@ const SocialName = styled.span`
 const Status = borderBase.extend`
     padding: 20px 34px;
 `;
-const Tabs = styled.ul`
-    width: 850px;
-    height: 70px;
-    border-bottom: 1px solid rgba(137,138,151,0.15);
-    position: ${props => props.fixed ? "fixed" : null};
-    top: 0px;
-    z-index: 1;
-    background-color: #fff;
-    display:flex;
-    align-items: center;
-`;
-const TabsItem = styled.li`
-    display: inline-block;
-    margin-right: 100px;
-    cursor: pointer;
-    font-size: 20px;
-    color: ${props => props.active ? "#3b3b3b" : "#878787"};
-    position: relative;
-    ::before {
-        content: "";
-        width: 10px;
-        height: ${props => props.active ? "2px" : 0};
-        background-color: #3b3b3b;
-        position: absolute;
-        bottom: -9px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    :last-child {
-        margin-left: 0;
-    }
-`;
-const BlockEle = styled.div`
-    width: 850px;
-    height: 70px;
-    display: ${props => props.fixed ? "block" : "none"};
-`;
+
 const StatusItem = styled.div`
     width: 100%;
     display: flex;
@@ -122,13 +61,6 @@ const StatusItem = styled.div`
         }
     }
 `;
-const ChartsBorder = styled.div`
-    border: 1px solid #EDEDED;
-    /* height: 400px; */
-    font-size: 36px;
-    color: #545454;
-    /* border-radius: 3px; */
-`;
 const EditBtn = styled.a`
     border: 1px solid #bababa;
     width: 150px;
@@ -138,24 +70,72 @@ const EditBtn = styled.a`
     align-items: center;
     cursor: pointer;
 `;
+
+const ImageWrapper = styled.div`
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+`;
+const InfoWrapper = styled.div`   
+    width: 400px;
+    height: 100px; 
+    margin-left: 20px;
+`;
+const ItemDesc = styled.span`
+    width: 100%;
+    margin-top: 6px;
+    font-size: 14px;
+    color: #4A4A4A;
+    display: block;
+`;
+const Wrapper = styled.div`   
+    width: ${p => p.width ? p.width + "px" : null};
+    height: ${p => p.height ? p.height + "px" : null};
+    margin: ${p => p.margin ? p.margin : null};
+    overflow: hidden;
+    ::after{
+        display: block;
+        content: " ";
+        width: 0;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+`;
+const GithubItem = styled.div`   
+    width: 100px;
+    height: 70px;
+    float: left;
+    span {
+        height: 35px;
+        text-align: center;
+        font-size: 16px;
+        color: #878787;
+        :last-child{
+            color: #3b3b3b;
+        }
+    }
+`;
+const LoadingWrapper = styled.div`
+    width: 100%;
+    min-height: calc(100vh - 160px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 export { 
     About,
     Founder,
     Agency,
     GithubData,
     AboutInfo,
-    Title,
-    Wrapper,
-    TopCharts,
     Website,
     SocialAccount,
     Status,
-    Tabs,
-    TabsItem,
-    RightSide,
-    BlockEle,
     SocialLink,
     SocialName,
     StatusItem,
-    ChartsBorder,
-    EditBtn }
+    ItemDesc,
+    Wrapper,
+    GithubItem,
+    LoadingWrapper }

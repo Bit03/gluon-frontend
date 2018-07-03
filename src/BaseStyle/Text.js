@@ -22,5 +22,11 @@ Text.item = Text.extend`
     -webkit-box-orient: vertical;
     overflow: hidden;
 `;
+Text.digest = Text.extend`
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+`;
 
 export default Text;

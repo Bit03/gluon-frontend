@@ -7,6 +7,7 @@ import { Row, Col } from '../../../base';
 import { Container, Line } from './styles';
 import { API } from '../../../service';
 import Pagination from '@components/Pagination';
+import { Loading } from '@base-style';
 
 export default class DAppList extends Component{
     constructor(props){
@@ -22,7 +23,7 @@ export default class DAppList extends Component{
             // next: "",
             currentPage: 1,
             pageSize: 21,
-            totalPage: 20
+            totalPage: null
         }
     }
     async componentDidMount(){
@@ -34,7 +35,9 @@ export default class DAppList extends Component{
     }
     setDappData = async( platform ) => {
         this.setState({
-            isloading: true
+            isloading: true,
+            totalPage: null,
+            platform
         })
         let originData = await API.getDappByPlatform(platform);
         this.setCoinPrice(originData);
@@ -43,8 +46,7 @@ export default class DAppList extends Component{
             dappData: originData.results,
             // next: originData.next,
             totalPage: originData.count % 21 === 0 ? Math.floor(originData.count / 21) : Math.floor(originData.count / 21) + 1,
-            isloading: false,
-            platform
+            isloading: false
         })
     }
     setCoinPrice = async( originData ) => {
@@ -70,7 +72,7 @@ export default class DAppList extends Component{
     setPlatform = async() => {
         let sideData = await API.getDappPlatform();
         this.setState({
-            sideMenuData: this.state.sideMenuData.concat(sideData.results),
+            sideMenuData: this.state.sideMenuData.concat(sideData.results)
         })
     }
     _changeShowCard = (value) => {
@@ -106,12 +108,12 @@ export default class DAppList extends Component{
             console.log(currentPage)
             if(this.state.isloading) return
             this.setState({
-                isloading: true
+                isloading: true,
+                currentPage
             })
             let originData = await API.getPageData(platform, currentPage);
             this.setCoinPrice(originData);
             this.setState({
-                currentPage,
                 dappData: originData.results,
                 isloading: false
             })
@@ -119,7 +121,7 @@ export default class DAppList extends Component{
     }
 
     render() {
-        let { sideMenuData, dappData, isCard, platform } = this.state;
+        let { sideMenuData, dappData, isCard, platform, isloading, totalPage, currentPage } = this.state;
 
         return(
             <Container>
@@ -129,12 +131,17 @@ export default class DAppList extends Component{
                     <Col flex={1}>
                         <SideMenu data={sideMenuData} changePlatform={this._changePlatform} platform={platform}/>
                     </Col>
-                    <Col flex={3} direction="column">
+                    { isloading ? <Col flex={3} direction="column"><Row height="200px" justifyContent="center" alignItems="center">
+                        <Loading/>
+                    </Row>
+                    <Row justifyContent="center" height={40}>
+                        { totalPage ? <Pagination totalPage={totalPage} currentPage={currentPage} changePage={this._changePage}/> : null}    
+                    </Row></Col> : <Col flex={3} direction="column">
                         <CardList data={dappData} isCard={isCard}/>
                         <Row justifyContent="center" height={40}>
-                            <Pagination totalPage={this.state.totalPage} currentPage={this.state.currentPage} changePage={this._changePage}/>
+                            <Pagination totalPage={totalPage} currentPage={currentPage} changePage={this._changePage}/>
                         </Row>
-                    </Col>
+                    </Col>}
                 </Row>
             </Container>
         )

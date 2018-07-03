@@ -10,6 +10,7 @@ const Container = styled.div`
     background-color: ${props => props.BgColor ? props.BgColor : '#fff'};
     background-image: ${props => props.BgImage ? props.BgImage : '#fff'};
 
+    padding: ${ props => props.padding ? props.padding : null };
     margin: 0 auto;
     position: relative;
 `;

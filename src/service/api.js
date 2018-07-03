@@ -1,4 +1,5 @@
 import URL from './url';
+import dottie from 'dottie';
 
 // const getWithParams = async ( url, params, data ) => {
 //     let result = await fetch(url, {
@@ -63,6 +64,13 @@ class FetchApi{
         let origin = await fetch(URL.getDetailData + slug, {
             credentials: "include"
         });
+        let result = await origin.json();
+        result = dottie.flatten(result);
+
+        return result;
+    }
+    getSearchData = async(name) => {
+        let origin = await fetch(URL.getSearchData + name);
         let result = await origin.json();
 
         return result;

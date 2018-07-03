@@ -13,7 +13,7 @@ const Wrapper = styled.ul`
     }
 `;
 const ItemLink = styled(Link)`
-    align-items: ${ p => p.isCard ? null : "center"};
+    align-items: ${ p => p.isCard ? null : "center" };
 
     display: flex;
     overflow: hidden;
@@ -36,15 +36,15 @@ const ItemWrapper = styled.li`
     transition: box-shadow ease .5s;
 `;
 const ImageWrapper = styled.div`
-    width: ${ p => p.isCard ? "55px" : "75px"};
-    height: ${ p => p.isCard ? "55px" : "75px"};
-    border-radius: ${ p => p.isCard ? "4px" : "8px"};
+    width: ${ p => p.isCard ? "55px" : "75px" };
+    height: ${ p => p.isCard ? "55px" : "75px" };
+    border-radius: ${ p => p.isCard ? "4px" : "8px" };
 
     overflow: hidden;
 `;
 const InfoWrapper = styled.div`
-    width: ${ p => p.isCard ? "155px" : "200px"};
-    height: ${ p => p.isCard ? "110px" : "75px"};
+    width: ${ p => p.isCard ? "155px" : "200px" };
+    height: ${ p => p.isCard ? "110px" : "75px" };
     
     margin-left: 20px;
 `;
@@ -63,7 +63,7 @@ const ItemDesc = styled.span`
     font-size: 14px;
     color: #4A4A4A;
     display: -webkit-box;
-    -webkit-line-clamp: ${props => props.isCard ? 4 : 2};
+    -webkit-line-clamp: ${ props => props.isCard ? 4 : 2 };
     -webkit-box-orient: vertical;
     overflow: hidden;
 `;

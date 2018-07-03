@@ -13,7 +13,7 @@ export default class CardList extends Component{
         return data.map((item, index) => {
             let img = item.site && item.site.logo_url ? item.site.logo_url : defaultImg;
 
-            return <Item key={index} data={item} isCard={isCard} img={img}/>
+            return <Item key={item.slug} data={item} isCard={isCard} img={img}/>
         })
     }
 
