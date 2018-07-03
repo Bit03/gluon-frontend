@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Span } from '../../base';
-// import { API } from '../../service';
+import { API } from '../../service';
 import ReactHighcharts from 'react-highcharts';
 import { About,
         Founder,
@@ -20,7 +20,8 @@ import { About,
         SocialLink,
         SocialName,
         StatusItem,
-        ChartsBorder } from './styles';
+        ChartsBorder,
+        EditBtn } from './styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
@@ -68,20 +69,15 @@ export default class DetailPage extends Component{
     async componentDidMount() {
         // let login = this.props.l;
         // console.log(this.props.match.params.slug)
-        this.pageInit();
+        
         let slug = this.props.match.params.slug;
-        await fetch(`/api/dapps/${slug}/`)
-        .then((res) => res.json())
-        .then((res) => {
-            // console.log(res)
-            // console.log(res.github.html_url)
-            this.setState({
-                detailData: res
-            })
+        let detailData = await API.getDetailData(slug);
+
+        this.setState({
+            detailData
+        }, () => {
+            this.pageInit();
         })
-        // this.setState({
-        //     name: login
-        // })
         
         // await fetch("https://api.dapprank.com/api/github/repos/ethereum/state/")
         // .then((res) => {
@@ -177,7 +173,7 @@ export default class DetailPage extends Component{
     }
     render(){
         let { detailData } = this.state;
-        console.log(detailData)
+        // console.log(detailData)
         // console.log(detailData.github.html_url)
         let github = detailData ? detailData.github.html_url : null;
         let twitter = detailData ? (detailData.social.twitter === "" ? null : detailData.social.twitter): null;
@@ -186,6 +182,8 @@ export default class DetailPage extends Component{
         let site = detailData ? (detailData.site ? detailData.site.url : null) : null;
         let status = detailData ? detailData.status : null;
         let ico = detailData ? detailData.ico_status : null;
+        let admin_url = detailData ? (detailData.admin_url ? detailData.admin_url : null) : null;
+        let baseUrl = "https://dapprank.com";
 
         return (
             <Container width="100%">
@@ -210,7 +208,8 @@ export default class DetailPage extends Component{
                         }
                         }}>
                         </ReactHighcharts> */}
-                        {detailData ? detailData.name : null}
+                        {detailData ? "项目名称: " + detailData.name : null}
+                        {admin_url ? <EditBtn href={baseUrl + admin_url} alt="admin_edit_page">编辑页面</EditBtn> : null}
                     </TopCharts>
                 </Wrapper>
                 <Container>

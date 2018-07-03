@@ -129,6 +129,15 @@ const ChartsBorder = styled.div`
     color: #545454;
     /* border-radius: 3px; */
 `;
+const EditBtn = styled.a`
+    border: 1px solid #bababa;
+    width: 150px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+`;
 export { 
     About,
     Founder,
@@ -148,4 +157,5 @@ export {
     SocialLink,
     SocialName,
     StatusItem,
-    ChartsBorder }
+    ChartsBorder,
+    EditBtn }
