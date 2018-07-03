@@ -59,6 +59,14 @@ class FetchApi{
 
         return result;
     }
+    getDetailData = async(slug) => {
+        let origin = await fetch(URL.getDetailData + slug, {
+            credentials: "include"
+        });
+        let result = await origin.json();
+
+        return result;
+    }
 }
 
 const API = new FetchApi()
