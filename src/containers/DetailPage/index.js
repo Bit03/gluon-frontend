@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // import { Container, Row, Col, Span } from '../../base';
 import { API } from '../../service';
+import PerfectImg from '@components/PerfectImg';
+import defaultImg from '@static/images/default-big-gray.png';
 // import ReactHighcharts from 'react-highcharts';
 import { Loading, Heading, Text, Row, Col, Container, FlexBox, Base, Btn } from '@base-style';
 import { About,
@@ -73,7 +75,7 @@ export default class DetailPage extends Component{
             <Container padding="0 20px">
                 <FlexBox justifyContent="flex-start" alignItems="flex-start" margin="20px 0">
                     <Wrapper width={70} height={70}>
-                        <img src={detailData["site.logo_url"] ? detailData["site.logo_url"] : require('@static/images/default-big-gray.png')} alt="logo"/>
+                        <PerfectImg src={detailData["site.logo_url"] ? detailData["site.logo_url"] : defaultImg} defaultImg={defaultImg} alt="logo"/>
                     </Wrapper>
                     <Wrapper width={400} height={100} margin="0 0 0 20px">
                         <Heading.item>{detailData["name"]}</Heading.item>

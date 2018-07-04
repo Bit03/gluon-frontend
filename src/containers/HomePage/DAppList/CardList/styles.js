@@ -14,6 +14,7 @@ const Wrapper = styled.ul`
 `;
 const ItemLink = styled(Link)`
     align-items: ${ p => p.isCard ? null : "center" };
+    padding: ${ p => p.isCard ? "24px" : "40px"};
 
     display: flex;
     overflow: hidden;
@@ -21,7 +22,7 @@ const ItemLink = styled(Link)`
 const ItemWrapper = styled.li`
     width: ${ p => p.isCard ? "280px" : "880px"};   
     float: ${ p => p.isCard ? "left" : null};
-    padding: ${ p => p.isCard ? "24px" : "40px"};
+    /* padding: ${ p => p.isCard ? "24px" : "40px"}; */
     height: ${ p => p.isCard ? "162px" : "154px"};
 
     background: #fff;
