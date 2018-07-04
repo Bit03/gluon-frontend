@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Wrapper } from './styles';
 import { Text, Heading, FlexBox } from '@base-style';
 const baseUrl = "https://www.chainnews.com";
