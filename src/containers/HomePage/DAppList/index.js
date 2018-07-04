@@ -35,13 +35,14 @@ export default class DAppList extends Component{
         let CardStatus = localStorage.getItem("CardStatus");
 
         this.setState({
-            isCard: CardStatus ? CardStatus.isCard : true
+            isCard: CardStatus ? JSON.parse(CardStatus).isCard : true
         })
     }
     setDappData = async( platform ) => {
         this.setState({
             isloading: true,
             totalPage: null,
+            currentPage: 1,
             platform
         })
         let originData = await API.getDappByPlatform(platform);

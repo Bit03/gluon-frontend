@@ -1,7 +1,8 @@
 import React from 'react';
 import { Heading, Text } from '@base-style';
+import PerfectImg from '@components/PerfectImg';
 import { ItemWrapper, ItemLink, ImageWrapper, InfoWrapper, PriceWrapper, PriceItem, ItemDesc } from './styles';
-
+import defaultImg from '@static/images/default-big-gray.png';
 const Item = function(props) {
     return (
         <ItemWrapper isCard={props.isCard}>
@@ -12,7 +13,8 @@ const Item = function(props) {
                     pathname: "/detail/" + props.data.slug
                 }}>
                 <ImageWrapper isCard={props.isCard}>
-                    <img src={props.img} alt="logo"/>
+                    {/* <img src={props.img} onError={(e) => e.target.src=defaultImg} alt="logo"/> */}
+                    <PerfectImg src={props.img} defaultImg={defaultImg} alt="logo"/>
                 </ImageWrapper>
                 <InfoWrapper isCard={props.isCard}>
                     <Heading.item>{props.data.name}</Heading.item>
