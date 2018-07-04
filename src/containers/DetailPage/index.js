@@ -51,7 +51,6 @@ export default class DetailPage extends Component{
         let detailData = await API.getDetailData(slug);
         let aboutNews = await API.getSearchData(detailData.name);
         aboutNews = aboutNews.results.slice(0, 3);
-        // console.log(aboutNews)
 
         this.setState({
             detailData,
@@ -94,7 +93,7 @@ export default class DetailPage extends Component{
                             <Text.item>{detailData["github.fork"] ? detailData["github.fork"] : "-"}</Text.item>
                         </GithubItem>
                     </Wrapper>
-                    {detailData["admin_url"] ? <Btn padding="10px 15px" border href={baseUrl + detailData["admin_url"]} alt="admin_edit_page">编辑页面</Btn> : null}
+                    {detailData["admin_url"] ? <Btn padding="10px 15px" border href={baseUrl + detailData["admin_url"]} alt="admin_edit_page" target="_blank">编辑页面</Btn> : null}
                 </FlexBox>
                 <Row margin="0 0 20px 0">
                     <Col width={8} padding="0 15px 0 0">    
@@ -123,7 +122,7 @@ export default class DetailPage extends Component{
                             </Agency> : null
                         }
                         {
-                            aboutNews ? <AboutInfo>
+                            aboutNews.length !== 0 ? <AboutInfo>
                                 <Heading.h2 size={24} bold padding="0 0 20px 0">相关新闻</Heading.h2>
                                 {aboutNews.map((item) => <NewsItem key={item.slug} data={item}></NewsItem>)}
                             </AboutInfo> : null
@@ -132,7 +131,7 @@ export default class DetailPage extends Component{
                     <Col width={4} padding="0 0 0 15px">
                         <FlexBox column>
                             <Website>
-                                <SocialLink href={detailData["site.url"]?detailData["site.url"]:"#notfound"} target="_blank">
+                                <SocialLink href={detailData["site.url"]?detailData["site.url"]:"#notfound"} disabled={!detailData["site.url"]} target="_blank">
                                     <FontAwesomeIcon icon={faLink} size="lg" color={detailData["site.url"]?"#0056ff":"#bababa"}/>
                                     <SocialName>
                                         网站 <br/>
@@ -140,11 +139,11 @@ export default class DetailPage extends Component{
                                 </SocialLink>
                             </Website>
                             <SocialAccount>
-                                <SocialLink href={detailData["github.html_url"]?detailData["github.html_url"]:"#notfound"} disabled={detailData["github.html_url"] === ""} target="_blank">
+                                <SocialLink href={detailData["github.html_url"]?detailData["github.html_url"]:"#notfound"} disabled={!detailData["github.html_url"]} target="_blank">
                                     <FontAwesomeIcon icon={faGithub} size="lg" color={detailData["github.html_url"]?"#0056ff": "#bababa"}/>
                                     <SocialName>GitHub</SocialName>
                                 </SocialLink>
-                                { SocialData.map((item) => <SocialLink key={item.name} href={detailData[`social.${item.name.toLowerCase()}`]?detailData[`social.${item.name.toLowerCase()}`]:"#notfound"} disabled={detailData[`social.${item.name.toLowerCase()}`] === ""} target="_blank">
+                                { SocialData.map((item) => <SocialLink key={item.name} href={detailData[`social.${item.name.toLowerCase()}`]?detailData[`social.${item.name.toLowerCase()}`]:"#notfound"} disabled={!detailData[`social.${item.name.toLowerCase()}`]} target="_blank">
                                     <FontAwesomeIcon icon={item.icon} size="lg" color={detailData[`social.${item.name.toLowerCase()}`]?"#0056ff": "#bababa"}/>
                                     <SocialName>{item.name}</SocialName>
                                 </SocialLink>)}
