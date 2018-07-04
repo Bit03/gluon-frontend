@@ -24,6 +24,7 @@ const Num = styled.li`
 const Btn = styled.button`
     font-size: 14px;
     color: #666666;
+    background-color: transparent;
     border: none;
     outline: none;
     cursor: pointer;
