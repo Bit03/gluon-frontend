@@ -14,7 +14,7 @@ import { Error404Page } from './containers/Error404Page';
 import ScrollToTop from './components/ScrollToTop';
 
 import { injectGlobal } from 'styled-components';
-import { Container } from './base';
+import { Base } from '@base-style';
 
 class App extends Component {
   render() {
@@ -22,7 +22,7 @@ class App extends Component {
     return (
         <Router onUpdate={() => window.scrollTo(0, 0)}>
           <ScrollToTop>
-            <Container width="100%">
+            <Base bgColor="#F7F6F2">
               <Header />
               <Switch>
                 <Route exact path="/" component={HomePage}/>
@@ -31,7 +31,7 @@ class App extends Component {
                 <Route path="*" component={Error404Page} />
               </Switch>
               <Footer title="DApp Rank"/>
-            </Container>
+            </Base>
           </ScrollToTop>
         </Router>
     );

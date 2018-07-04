@@ -9,6 +9,8 @@ Heading.h2 = styled.h2`
     color: ${p => p.color ? p.color : '#3b3b3b'};
     font-size: ${p => p.size ? p.size + "px" : "20px"};
     font-weight: ${p => p.bold ? "bold" : null};
+    margin: ${p => p.margin ? p.margin : null};
+    padding: ${p => p.padding ? p.padding : null};
 `;
 
 Heading.h3 = styled.h3`

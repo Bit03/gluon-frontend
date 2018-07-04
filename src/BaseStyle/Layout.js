@@ -45,6 +45,7 @@ const FlexBox = styled.div`
     width: ${props => props.width ? props.width + "px" : null};
     height: ${props => props.height ? props.height + "px" : null};
     margin: ${props => props.margin ? props.margin : null};
+    background-color: ${p => p.bgColor ? p.bgColor : null};
 
     display: flex;
 `;

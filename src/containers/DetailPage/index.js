@@ -17,6 +17,7 @@ import { About,
     GithubItem,
     Wrapper,
     LoadingWrapper } from './styles';
+import NewsItem from './NewsItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faTwitter, faFacebook, faLinkedin, faReddit, faSlack, faGitter, faTelegram, faMedium, faYoutube, faInstagram, faGooglePlus, faWikipediaW } from '@fortawesome/free-brands-svg-icons';
@@ -97,42 +98,36 @@ export default class DetailPage extends Component{
                 </FlexBox>
                 <Row margin="0 0 20px 0">
                     <Col width={8} padding="0 15px 0 0">    
-                        <About>
-                            <Heading.h2 size={24} bold>关于</Heading.h2>
-                            <Wrapper></Wrapper>
-                        </About>
-                        <Founder>
-                            <Heading.h2 size={24} bold>团队</Heading.h2>
-                            <Wrapper></Wrapper>
-                        </Founder>
-                        <Agency>
-                            <Heading.h2 size={24} bold>投资机构</Heading.h2>
-                            <Wrapper></Wrapper>
-                        </Agency>
-                        <AboutInfo>
-                            <Heading.h2 size={24} bold>相关新闻</Heading.h2>
-                            {/* <FlexBox column> */}
-                                { aboutNews.map((item) => <FlexBox key={item.slug} margin="20px 0 0 0" justifyContent="space-between">
-                                    <Wrapper width={450} height={130}>
-                                        <Heading.digest size={24} bold margin="0 0 20px 0">{item.title}</Heading.digest>
-                                        <Text.digest>{item.digest}</Text.digest>
-                                        <Wrapper height={40} margin="10px 0 0 0">
-                                            <FlexBox justifyContent="flex-start">
-                                                <img src={item.author_avatar_url} alt="avatar" width="26" height="26"/>
-                                                <Text>{item.author_name}</Text>
-                                                <Text>{item.pp_time}</Text>
-                                                { item.tag_list.map((item) => <Text key={item.id}>
-                                                    {item.name}
-                                                </Text>)}
-                                            </FlexBox>
-                                        </Wrapper>
-                                    </Wrapper>
-                                    <Wrapper width={240} height={130}>
-                                        <img src={item.cover_url} alt="cover"/>
-                                    </Wrapper>
-                                </FlexBox>)}
-                            {/* </FlexBox> */}
-                        </AboutInfo>
+                        {
+                            detailData["description_cn"] ? <About>
+                                <Heading.h2 size={24} bold padding="0 0 20px 0">关于</Heading.h2>
+                                <Wrapper>
+                                    <Text.detail>{detailData["description_cn"]}</Text.detail>
+                                </Wrapper>
+                            </About> : null
+                        }
+                        {
+                            detailData["founder"] ? <Founder>
+                                <Heading.h2 size={24} bold padding="0 0 20px 0">团队</Heading.h2>
+                                <Wrapper>
+                                    <Text.detail>{detailData["founder"]}</Text.detail>
+                                </Wrapper>
+                            </Founder> : null
+                        }
+                        {
+                            detailData["vc"] ? <Agency>
+                                <Heading.h2 size={24} bold padding="0 0 20px 0">投资机构</Heading.h2>
+                                <Wrapper>
+                                    <Text.detail>{detailData["vc"]}</Text.detail>
+                                </Wrapper>
+                            </Agency> : null
+                        }
+                        {
+                            aboutNews ? <AboutInfo>
+                                <Heading.h2 size={24} bold padding="0 0 20px 0">相关新闻</Heading.h2>
+                                {aboutNews.map((item) => <NewsItem key={item.slug} data={item}></NewsItem>)}
+                            </AboutInfo> : null
+                        }
                     </Col>
                     <Col width={4} padding="0 0 0 15px">
                         <FlexBox column>
@@ -145,11 +140,11 @@ export default class DetailPage extends Component{
                                 </SocialLink>
                             </Website>
                             <SocialAccount>
-                                <SocialLink href={detailData["github.html_url"]?detailData["github.html_url"]:"#notfound"} disabled={detailData["github.html_url"]} target="_blank">
+                                <SocialLink href={detailData["github.html_url"]?detailData["github.html_url"]:"#notfound"} disabled={detailData["github.html_url"] === ""} target="_blank">
                                     <FontAwesomeIcon icon={faGithub} size="lg" color={detailData["github.html_url"]?"#0056ff": "#bababa"}/>
                                     <SocialName>GitHub</SocialName>
                                 </SocialLink>
-                                { SocialData.map((item) => <SocialLink key={item.name} href={detailData[`social.${item.name.toLowerCase()}`]?detailData[`social.${item.name.toLowerCase()}`]:"#notfound"} disabled={detailData[`social.${item.name.toLowerCase()}`]} target="_blank">
+                                { SocialData.map((item) => <SocialLink key={item.name} href={detailData[`social.${item.name.toLowerCase()}`]?detailData[`social.${item.name.toLowerCase()}`]:"#notfound"} disabled={detailData[`social.${item.name.toLowerCase()}`] === ""} target="_blank">
                                     <FontAwesomeIcon icon={item.icon} size="lg" color={detailData[`social.${item.name.toLowerCase()}`]?"#0056ff": "#bababa"}/>
                                     <SocialName>{item.name}</SocialName>
                                 </SocialLink>)}
