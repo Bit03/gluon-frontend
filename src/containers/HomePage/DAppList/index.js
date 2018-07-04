@@ -17,7 +17,7 @@ export default class DAppList extends Component{
                 platform: "All"
             }],
             dappData: [],
-            isCard: true,
+            isCard: null,
             platform: "All",
             isloading: true,
             // next: "",
@@ -32,6 +32,11 @@ export default class DAppList extends Component{
     init = () => {
         this.setPlatform();
         this.setDappData("All");
+        let CardStatus = localStorage.getItem("CardStatus");
+
+        this.setState({
+            isCard: CardStatus ? CardStatus.isCard : true
+        })
     }
     setDappData = async( platform ) => {
         this.setState({
@@ -77,6 +82,7 @@ export default class DAppList extends Component{
     }
     _changeShowCard = (value) => {
         return () => {
+            localStorage.setItem('CardStatus', JSON.stringify({isCard: value}));
             this.setState({
                 isCard: value
             })

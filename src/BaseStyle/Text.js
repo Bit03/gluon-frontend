@@ -5,6 +5,7 @@ const Text = styled.span`
     font-size: ${p => p.size ? p.size + 'px' : '14px'};
     font-family: ${p => p.family ? p.family : null};
     font-weight: ${p => p.bold ? 'bold' : null};
+    margin: ${p => p.margin ? p.margin : null};
 `;
 
 Text.p = Text.withComponent('p');
@@ -27,6 +28,11 @@ Text.digest = Text.extend`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+`;
+
+Text.detail = Text.extend`
+    font-size: 16px;
+    color: #3B3B3B;
 `;
 
 export default Text;

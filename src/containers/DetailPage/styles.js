@@ -1,17 +1,5 @@
 import styled from 'styled-components';
 
-const baseLeftSide = styled.div`
-    width: 100%;
-`;
-const About = baseLeftSide.extend``;
-const Founder = baseLeftSide.extend``;
-const Agency = baseLeftSide.extend``;
-const GithubData = baseLeftSide.extend``;
-const AboutInfo = baseLeftSide.extend`
-    /* position: ${props => props.fixed ? "fixed" : null};
-    top: 20px; */
-`;
-
 const borderBase = styled.div`
     width: 100%;
     margin-top: 20px;
@@ -19,6 +7,18 @@ const borderBase = styled.div`
     border-radius: 3px;
     padding: 20px 0;
     padding-left: 34px;
+    background-color: #fff;
+`;
+const leftSideBase = borderBase.extend`
+    padding: 20px;
+`;
+const About = leftSideBase.extend``;
+const Founder = leftSideBase.extend``;
+const Agency = leftSideBase.extend``;
+const GithubData = leftSideBase.extend``;
+const AboutInfo = leftSideBase.extend`
+    /* position: ${props => props.fixed ? "fixed" : null};
+    top: 20px; */
 `;
 const Website = borderBase.extend`
 `;
@@ -31,6 +31,7 @@ const SocialLink = styled.a`
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    pointer-events: ${p => p.disabled ? "none" : null};
     :last-child {
         margin-bottom: 0;
     }
@@ -73,6 +74,8 @@ const Wrapper = styled.div`
     width: ${p => p.width ? p.width + "px" : null};
     height: ${p => p.height ? p.height + "px" : null};
     margin: ${p => p.margin ? p.margin : null};
+    padding: ${p => p.padding ? p.padding : null};
+    border-bottom: ${p => p.border ? "1px solid #ededed" : null};
     overflow: hidden;
     ::after{
         display: block;
@@ -81,6 +84,12 @@ const Wrapper = styled.div`
         height: 0;
         visibility: hidden;
         clear: both;
+    }
+    a{
+        color: #3b3b3b;
+        :hover{
+            color: #0056ff;
+        }
     }
 `;
 const GithubItem = styled.div`   

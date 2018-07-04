@@ -24,6 +24,7 @@ const ItemWrapper = styled.li`
     padding: ${ p => p.isCard ? "24px" : "40px"};
     height: ${ p => p.isCard ? "162px" : "154px"};
 
+    background: #fff;
     margin-left: 20px;
     margin-bottom: 24px;
     display: block;
