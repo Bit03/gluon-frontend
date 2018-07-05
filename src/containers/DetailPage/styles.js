@@ -12,6 +12,7 @@ const borderBase = styled.div`
 const leftSideBase = borderBase.extend`
     padding: 20px;
 `;
+const Charts = leftSideBase.extend``;
 const About = leftSideBase.extend``;
 const Founder = leftSideBase.extend``;
 const Agency = leftSideBase.extend``;
@@ -68,7 +69,10 @@ const ItemDesc = styled.span`
     margin-top: 6px;
     font-size: 14px;
     color: #4A4A4A;
-    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 `;
 const Wrapper = styled.div`   
     width: ${p => p.width ? p.width + "px" : null};
@@ -92,18 +96,24 @@ const Wrapper = styled.div`
         }
     }
 `;
-const GithubItem = styled.div`   
-    width: 100px;
-    height: 70px;
+const GithubItem = styled.div`
     float: left;
+    border: 1px solid rgba(137,138,151,0.15);
+    border-radius: 3px;
+    background-color: #fff;
+    margin-left: 4px;
+    ::after{
+        display: block;
+        content: " ";
+        width: 0;
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
     span {
-        height: 35px;
-        text-align: center;
+        font-weight: 500;
         font-size: 16px;
-        color: #878787;
-        :last-child{
-            color: #3b3b3b;
-        }
+        float: left;
     }
 `;
 const LoadingWrapper = styled.div`
@@ -113,7 +123,8 @@ const LoadingWrapper = styled.div`
     justify-content: center;
     align-items: center;
 `;
-export { 
+export {
+    Charts,
     About,
     Founder,
     Agency,

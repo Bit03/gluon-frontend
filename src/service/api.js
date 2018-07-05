@@ -38,7 +38,14 @@ class FetchApi{
     getCommitData = async ( login, cb ) => {
         let origin = await fetch(URL.getCommitData + login + '/commit/');
         let result = await origin.json();
-        cb(result)
+        
+        return result;
+    }
+    getStateData = async ( login, cb ) => {
+        let origin = await fetch(URL.getStateData + login + '/state/');
+        let result = await origin.json();
+        
+        return result;
     }
     getPriceData = async ( symbolArray ) => {
         let origin = await fetch(URL.getPriceData + symbolArray);

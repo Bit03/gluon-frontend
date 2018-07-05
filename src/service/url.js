@@ -7,6 +7,7 @@ const URL = {
     getDappDataByPlatform: baseUrl + `/api/dapps/?size=${PageSize}&platform=`,
     getOrg: baseUrl + "/api/github/org/",
     getCommitData: baseUrl + "/api/github/repos/",
+    getStateData: baseUrl + "/api/github/repos/",
     getPriceData: "https://www.feixiaohao.tech/api/coin/getICOInfo?",
     getDetailData: "/api/dapps/",
     getSearchData: "https://api.chainnews.com/api/articles/search?q="
