@@ -22,6 +22,7 @@ Text.item = Text.extend`
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    padding: ${p => p.padding ? p.padding : null};
 `;
 Text.digest = Text.extend`
     display: -webkit-box;
