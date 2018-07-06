@@ -2,7 +2,7 @@ import React from 'react';
 import { Wrapper } from './styles';
 import { Text, Heading, FlexBox } from '@base-style';
 const baseUrl = "https://www.chainnews.com";
-const NewsItem = (props) => <Wrapper border padding="20px 0">
+const NewsItem = (props) => <Wrapper border={props.border} padding="20px 0">
     <Heading.h2 margin="0 0 6px 0">
         <a href={ baseUrl + props.data.absolute_url} alt="news" target="_blank">{props.data.title}</a>
     </Heading.h2>

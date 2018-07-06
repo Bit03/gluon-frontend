@@ -29,10 +29,11 @@ const ItemList = styled.li`
     position: relative;
     ::before {
         content: " ";
-        display: ${p => p.active ? "block" : "none"};
+        visibility: ${p => p.active ? "visible" : "hidden"};
         position: absolute;
-        top: 3.5px;
+        top: 50%;
         left: -10px;
+        transform: translateY(-50%);
         width: 0;
         height: 0;
         border-width: 6px;

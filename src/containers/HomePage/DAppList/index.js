@@ -13,9 +13,7 @@ export default class DAppList extends Component{
     constructor(props){
         super(props);
         this.state = {
-            sideMenuData: [{
-                platform: "All"
-            }],
+            sideMenuData: [],
             dappData: [],
             isCard: null,
             platform: "All",
@@ -78,7 +76,7 @@ export default class DAppList extends Component{
     setPlatform = async() => {
         let sideData = await API.getDappPlatform();
         this.setState({
-            sideMenuData: this.state.sideMenuData.concat(sideData.results)
+            sideMenuData: [{platform: "All"}].concat(sideData.results)
         })
     }
     _changeShowCard = (value) => {
@@ -90,6 +88,8 @@ export default class DAppList extends Component{
         }
     }
     _changePlatform = (platform) => {
+        if(this.state.platform === platform) return;
+
         return async () => {
             // this.setState({
             //     isloading: true
@@ -113,7 +113,8 @@ export default class DAppList extends Component{
         }
         return async() => {
             console.log(currentPage)
-            if(this.state.isloading) return
+            if(this.state.isloading) return;
+            if(this.state.currentPage === currentPage) return;
             this.setState({
                 isloading: true,
                 currentPage

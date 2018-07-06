@@ -13,8 +13,7 @@ const Wrapper = styled.ul`
     }
 `;
 const ItemLink = styled(Link)`
-    align-items: ${ p => p.isCard ? null : "center" };
-    padding: ${ p => p.isCard ? "24px" : "40px"};
+    padding: 20px;
 
     display: flex;
     overflow: hidden;
@@ -22,18 +21,14 @@ const ItemLink = styled(Link)`
 const ItemWrapper = styled.li`
     width: ${ p => p.isCard ? "280px" : "880px"};   
     float: ${ p => p.isCard ? "left" : null};
-    /* padding: ${ p => p.isCard ? "24px" : "40px"}; */
-    height: ${ p => p.isCard ? "162px" : "154px"};
 
     background: #fff;
     margin-left: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     display: block;
-    border: 1px solid rgba(51,51,51,.05);
-    border-radius: 8px;
+    border-radius: 3px;
     cursor: pointer;
     box-shadow: 0 7px 20px 1px #E6EAF2;
-    transition: box-shadow ease .5s;
 `;
 const ImageWrapper = styled.div`
     width: ${ p => p.isCard ? "55px" : "75px" };
@@ -50,11 +45,12 @@ const InfoWrapper = styled.div`
 `;
 const PriceWrapper = styled.div`
     width: 440px;
-    margin-left: 63px;
+    margin-left: 80px;
+    display: flex;
+    align-items: center;
 `;
 const PriceItem = styled.div`
     width: 110px;
-    float: left;
     text-align: center;
 `;
 const ItemDesc = styled.span`
