@@ -22,7 +22,7 @@ class App extends Component {
     return (
         <Router onUpdate={() => window.scrollTo(0, 0)}>
           <ScrollToTop>
-            <Base bgColor="#F7F6F2">
+            <Base bgColor="#f8f8f8">
               <Header />
               <Switch>
                 <Route exact path="/" component={HomePage}/>

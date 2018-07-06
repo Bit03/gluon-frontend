@@ -32,9 +32,7 @@ const ItemWrapper = styled.li`
     border: 1px solid rgba(51,51,51,.05);
     border-radius: 8px;
     cursor: pointer;
-    :hover{
-        box-shadow: 0 7px 20px 1px #E6EAF2;
-    }
+    box-shadow: 0 7px 20px 1px #E6EAF2;
     transition: box-shadow ease .5s;
 `;
 const ImageWrapper = styled.div`

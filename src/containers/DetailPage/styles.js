@@ -8,6 +8,7 @@ const borderBase = styled.div`
     padding: 20px 0;
     padding-left: 34px;
     background-color: #fff;
+    box-shadow: 0 7px 20px 1px #E6EAF2;
 `;
 const leftSideBase = borderBase.extend`
     padding: 20px;
@@ -101,7 +102,7 @@ const GithubItem = styled.div`
     border: 1px solid rgba(137,138,151,0.15);
     border-radius: 3px;
     background-color: #fff;
-    margin-left: 4px;
+    margin-left: 10px;
     ::after{
         display: block;
         content: " ";
