@@ -24,6 +24,21 @@ const Wrapper = styled.ul`
 const ItemList = styled.li`
     cursor: pointer;
     margin-bottom: 10px;
+    transform: translateX(${p => p.active ? "-10px" : null});
+    transition: all ease .5s;
+    position: relative;
+    ::before {
+        content: " ";
+        display: ${p => p.active ? "block" : "none"};
+        position: absolute;
+        top: 3.5px;
+        left: -10px;
+        width: 0;
+        height: 0;
+        border-width: 6px;
+        border-style: solid;
+        border-color: transparent transparent transparent #0056ff;
+    }
 `;
 
 export {

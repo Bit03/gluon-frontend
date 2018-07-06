@@ -46,6 +46,7 @@ export default class DetailPage extends Component{
         super(props);
         this.state = {
             isloading: true,
+            isChartsLoading: true,
             detailData: null,
             aboutNews: null,
             commitData: [],
@@ -60,6 +61,12 @@ export default class DetailPage extends Component{
         let slug = this.props.match.params.slug;
         let detailData = await API.getDetailData(slug);
         let aboutNews = await API.getSearchData(detailData.name);
+        aboutNews = aboutNews.results.slice(0, 3);
+        this.setState({
+            detailData,
+            aboutNews,
+            isloading: false
+        })
         let commitData = detailData["github.login"] ? await API.getCommitData(detailData["github.login"]) : [];
         let stateData = detailData["github.login"] ? await API.getStateData(detailData["github.login"]) : [];       
         if(stateData.length!==0) this.cleanStateData(stateData);
@@ -70,14 +77,12 @@ export default class DetailPage extends Component{
         })
         commitData.reverse();
         // console.log(commitData)
-        aboutNews = aboutNews.results.slice(0, 3);
+
 
         this.setState({
-            detailData,
-            aboutNews,
             commitData,
             stateData,
-            isloading: false
+            isChartsLoading: false
         }, () => {
             this.setState({
                 noReflow: true
@@ -107,10 +112,9 @@ export default class DetailPage extends Component{
     }
 
     render(){
-        let { detailData, isloading, aboutNews, commitData, stateData, watchData, starData, forkData, noReflow } = this.state;
+        let { detailData, isloading, aboutNews, commitData, stateData, watchData, starData, forkData, noReflow, isChartsLoading } = this.state;
         let baseUrl = "https://dapprank.com";
         let series = [];
-        if(commitData.length !== 0) series.push({data: commitData, name: "commit"});
         if(watchData.length !== 0) series.push({data: watchData, name: "watch"});
         if(starData.length !== 0) series.push({data: starData, name: "star"});
         if(forkData.length !== 0) series.push({data: forkData, name: "fork"});
@@ -152,40 +156,86 @@ export default class DetailPage extends Component{
                 <Row margin="0 0 20px 0">
                     <Col width={8} padding="0 15px 0 0">
                         {
-                            commitData.length !== 0 || stateData.length !== 0 ? <Charts>
+                            detailData["github.html_url"] ? <Charts>
                                 <Heading.h2 size={24} bold padding="0 0 20px 0">Github 数据</Heading.h2>
-                                <ReactHighcharts
-                                    config={{
-                                        title: {
-                                            text: detailData.name
-                                        },
-                                        xAxis: {
-                                            type: 'datetime',
-                                            labels: {
-                                                rotation: -50,
-                                                align: 'right',
-                                                formatter: function() {
-                                                    let date = new Date(this.value);
-                                                    let year = date.getFullYear();
-                                                    let month = date.getMonth() + 1;
-                                                    month = month > 9 ? month : "0" + month;
-                                                    let date1 = date.getDate();
-                                                    date1 = date1 > 9 ? date1 : "0" + date1;
+                                <FlexBox justifyContent="center">
+                                {
+                                    isChartsLoading ?  <Loading /> : <Wrapper style={{width: "100%"}}>
+                                        {
+                                            commitData.length !== 0 ? <ReactHighcharts
+                                            config={{
+                                                title: {
+                                                    text: detailData.name
+                                                },
+                                                xAxis: {
+                                                    type: 'datetime',
+                                                    labels: {
+                                                        rotation: -50,
+                                                        align: 'right',
+                                                        formatter: function() {
+                                                            let date = new Date(this.value);
+                                                            let year = date.getFullYear();
+                                                            let month = date.getMonth() + 1;
+                                                            month = month > 9 ? month : "0" + month;
+                                                            let date1 = date.getDate();
+                                                            date1 = date1 > 9 ? date1 : "0" + date1;
 
-                                                    return year + "-" + month + "-" + date1;
-                                                }
-                                            },
-                                            tickInterval: 1                                        
-                                        },
-                                        credits:{
-                                            enabled: false // 禁用版权信息
-                                        },
-                                        time: {
-                                            useUTC: false
-                                        },
-                                        series,
-                                    }}
-                                    noReflow={noReflow}/>
+                                                            return year + "-" + month + "-" + date1;
+                                                        }
+                                                    },
+                                                    tickInterval: 1                                        
+                                                },
+                                                credits:{
+                                                    enabled: false // 禁用版权信息
+                                                },
+                                                time: {
+                                                    useUTC: false
+                                                },
+                                                series: [{
+                                                    data: commitData,
+                                                    name: "commit",
+                                                    type: "column"
+                                                }],
+                                            }}
+                                            noReflow={noReflow}/> : null
+                                        }
+                                        {
+                                            stateData.length !== 0 ? <ReactHighcharts
+                                            config={{
+                                                xAxis: {
+                                                    type: 'datetime',
+                                                    labels: {
+                                                        rotation: -50,
+                                                        align: 'right',
+                                                        formatter: function() {
+                                                            let date = new Date(this.value);
+                                                            let year = date.getFullYear();
+                                                            let month = date.getMonth() + 1;
+                                                            month = month > 9 ? month : "0" + month;
+                                                            let date1 = date.getDate();
+                                                            date1 = date1 > 9 ? date1 : "0" + date1;
+
+                                                            return year + "-" + month + "-" + date1;
+                                                        }
+                                                    },
+                                                    tickInterval: 1                                        
+                                                },
+                                                credits:{
+                                                    enabled: false // 禁用版权信息
+                                                },
+                                                time: {
+                                                    useUTC: false
+                                                },
+                                                series,
+                                            }}
+                                            noReflow={noReflow}/> : null
+                                        }
+                                        {
+                                            stateData.length === 0 && commitData.length === 0 ? <FlexBox justifyContent="center"><Text>Comming Soon</Text></FlexBox> : null
+                                        }
+                                    </Wrapper>
+                                }
+                                </FlexBox>
                             </Charts> : null
                         }
                         {
