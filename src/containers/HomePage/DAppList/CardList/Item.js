@@ -7,7 +7,6 @@ const Item = function(props) {
     return (
         <ItemWrapper isCard={props.isCard}>
             <ItemLink
-                isCard={props.isCard}
                 target="_blank"
                 to={{
                     pathname: "/detail/" + props.data.slug

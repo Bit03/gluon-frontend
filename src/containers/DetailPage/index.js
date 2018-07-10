@@ -5,7 +5,8 @@ import PerfectImg from '@components/PerfectImg';
 import defaultImg from '@static/images/default-big-gray.png';
 import ReactHighcharts from 'react-highcharts';
 import { Loading, Heading, Text, Row, Col, Container, FlexBox, Base, Btn } from '@base-style';
-import { 
+import {
+    NoData, 
     Charts,
     About,
     Founder,
@@ -127,7 +128,7 @@ export default class DetailPage extends Component{
             :
             <Base>
             <Container padding="0 20px">
-                <FlexBox justifyContent="flex-start" alignItems="flex-start" margin="20px 0">
+                <FlexBox justifyContent="flex-start" alignItems="flex-start" margin="50px 0 0 0">
                     <Wrapper width={70} height={70}>
                         <PerfectImg src={detailData["site.logo_url"] ? detailData["site.logo_url"] : defaultImg} defaultImg={defaultImg} alt="logo"/>
                     </Wrapper>
@@ -135,29 +136,31 @@ export default class DetailPage extends Component{
                         <Heading.item>{detailData["name"]}</Heading.item>
                         <ItemDesc>{detailData["description_cn"] ? detailData["description_cn"] : detailData["description"] }</ItemDesc>
                     </Wrapper>
-                    <Wrapper margin="0 40px 0 20px">
-                        <GithubItem>
-                            <Text.item padding="6px 0 6px 8px"><FontAwesomeIcon icon={faEye} color="#3b3b3b"/></Text.item>
-                            <Text.item padding="6px 0 6px 4px">Watch</Text.item>
-                            <Text.item padding="6px 6px 6px 8px">{detailData["github.watch"] ? detailData["github.watch"] : "-"}</Text.item>
-                        </GithubItem>
-                        <GithubItem>
-                            <Text.item padding="6px 0 6px 8px"><FontAwesomeIcon icon={faStar} color="#3b3b3b"/></Text.item>
-                            <Text.item padding="6px 0 6px 4px">Star</Text.item>
-                            <Text.item padding="6px 6px 6px 8px">{detailData["github.star"] ? detailData["github.star"] : "-"}</Text.item>
-                        </GithubItem>
-                        <GithubItem>
-                            <Text.item padding="6px 0 6px 8px">Fork</Text.item>
-                            <Text.item padding="6px 6px 6px 8px">{detailData["github.fork"] ? detailData["github.fork"] : "-"}</Text.item>
-                        </GithubItem>
-                    </Wrapper>
                     {detailData["admin_url"] ? <Btn padding="10px 15px" border href={baseUrl + detailData["admin_url"]} alt="admin_edit_page" target="_blank">编辑页面</Btn> : null}
                 </FlexBox>
-                <Row margin="0 0 20px 0">
+                <Row margin="0 0 40px 0">
                     <Col width={8} padding="0 15px 0 0">
                         {
                             detailData["github.html_url"] ? <Charts>
+                                <FlexBox>
                                 <Heading.h2 size={24} bold padding="0 0 20px 0">Github 数据</Heading.h2>
+                                <Wrapper padding="0 0 20px 0">
+                                    <GithubItem>
+                                        <Text.item padding="6px 0 6px 8px"><FontAwesomeIcon icon={faEye} color="#3b3b3b"/></Text.item>
+                                        <Text.item padding="6px 0 6px 4px">Watch</Text.item>
+                                        <Text.item padding="6px 6px 6px 8px">{detailData["github.watch"] ? detailData["github.watch"] : "-"}</Text.item>
+                                    </GithubItem>
+                                    <GithubItem>
+                                        <Text.item padding="6px 0 6px 8px"><FontAwesomeIcon icon={faStar} color="#3b3b3b"/></Text.item>
+                                        <Text.item padding="6px 0 6px 4px">Star</Text.item>
+                                        <Text.item padding="6px 6px 6px 8px">{detailData["github.star"] ? detailData["github.star"] : "-"}</Text.item>
+                                    </GithubItem>
+                                    <GithubItem>
+                                        <Text.item padding="6px 0 6px 8px">Fork</Text.item>
+                                        <Text.item padding="6px 6px 6px 8px">{detailData["github.fork"] ? detailData["github.fork"] : "-"}</Text.item>
+                                    </GithubItem>
+                                </Wrapper>
+                                </FlexBox>
                                 <FlexBox justifyContent="center">
                                 {
                                     isChartsLoading ?  <Loading /> : <Wrapper style={{width: "100%"}}>
@@ -202,6 +205,9 @@ export default class DetailPage extends Component{
                                         {
                                             stateData.length !== 0 ? <ReactHighcharts
                                             config={{
+                                                title: {
+                                                    text: commitData.length === 0 ? detailData.name : ""
+                                                },
                                                 xAxis: {
                                                     type: 'datetime',
                                                     labels: {
@@ -265,8 +271,11 @@ export default class DetailPage extends Component{
                         {
                             aboutNews.length !== 0 ? <AboutInfo>
                                 <Heading.h2 size={24} bold padding="0 0 20px 0">相关新闻</Heading.h2>
-                                {aboutNews.map((item) => <NewsItem key={item.slug} data={item}></NewsItem>)}
+                                {aboutNews.map((item, index) => <NewsItem key={item.slug} border={index !== aboutNews.length - 1} data={item}></NewsItem>)}
                             </AboutInfo> : null
+                        }
+                        {
+                            detailData["github.html_url"] || detailData["description_cn"] || detailData["founder"] || detailData["vc"] || aboutNews.length !== 0 ? null : <NoData><FlexBox justifyContent="center"><Text>敬请期待</Text></FlexBox></NoData>
                         }
                     </Col>
                     <Col width={4} padding="0 0 0 15px">
@@ -287,7 +296,7 @@ export default class DetailPage extends Component{
                                 { SocialData.map((item) => <SocialLink key={item.name} href={detailData[`social.${item.name.toLowerCase()}`]?detailData[`social.${item.name.toLowerCase()}`]:"#notfound"} disabled={!detailData[`social.${item.name.toLowerCase()}`]} target="_blank">
                                     <FontAwesomeIcon icon={item.icon} size="lg" color={detailData[`social.${item.name.toLowerCase()}`]?"#0056ff": "#bababa"}/>
                                     <SocialName>{item.name}</SocialName>
-                                </SocialLink>)}
+                                </SocialLink>) }
                             </SocialAccount>
                             <Status>
                                 <StatusItem>

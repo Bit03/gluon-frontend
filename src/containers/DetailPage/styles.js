@@ -13,6 +13,7 @@ const borderBase = styled.div`
 const leftSideBase = borderBase.extend`
     padding: 20px;
 `;
+const NoData = leftSideBase.extend``;
 const Charts = leftSideBase.extend``;
 const About = leftSideBase.extend``;
 const Founder = leftSideBase.extend``;
@@ -125,6 +126,7 @@ const LoadingWrapper = styled.div`
     align-items: center;
 `;
 export {
+    NoData,
     Charts,
     About,
     Founder,

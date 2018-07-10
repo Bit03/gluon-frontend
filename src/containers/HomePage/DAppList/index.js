@@ -13,9 +13,7 @@ export default class DAppList extends Component{
     constructor(props){
         super(props);
         this.state = {
-            sideMenuData: [{
-                platform: "All"
-            }],
+            sideMenuData: [],
             dappData: [],
             isCard: null,
             platform: "All",
@@ -46,10 +44,10 @@ export default class DAppList extends Component{
             platform
         })
         let originData = await API.getDappByPlatform(platform);
-        this.setCoinPrice(originData);
+        let dappData = await this.setCoinPrice(originData);
 
         this.setState({
-            dappData: originData.results,
+            dappData,
             // next: originData.next,
             totalPage: originData.count % 21 === 0 ? Math.floor(originData.count / 21) : Math.floor(originData.count / 21) + 1,
             isloading: false
@@ -64,21 +62,23 @@ export default class DAppList extends Component{
         })
         let priceData = await API.getPriceData(symbols.join('&'));
         originData.results.map((item) => {
-            priceData.data.map(priceItem => {
+            priceData.map(priceItem => {
                 if(priceItem.symbol === item.symbol){
-                    item.price_usd = priceItem.attach.price_usd;
-                    item.sale_price_usd = priceItem.attach.sale_price_usd;
-                    item.usd_raised = priceItem.attach.usd_raised;
+                    item.price_usd = priceItem["attach.price_usd"] ? priceItem["attach.price_usd"] : null;
+                    item.sale_price_usd = priceItem["attach.sale_price_usd"] ? priceItem["attach.sale_price_usd"] : null;
+                    item.usd_raised = priceItem["attach.usd_raised"] ? priceItem["attach.usd_raised"] : null;
                 }
                 return true;
             })
             return true;
         })
+
+        return originData.results;
     }
     setPlatform = async() => {
         let sideData = await API.getDappPlatform();
         this.setState({
-            sideMenuData: this.state.sideMenuData.concat(sideData.results)
+            sideMenuData: [{platform: "All"}].concat(sideData.results)
         })
     }
     _changeShowCard = (value) => {
@@ -90,6 +90,8 @@ export default class DAppList extends Component{
         }
     }
     _changePlatform = (platform) => {
+        if(this.state.platform === platform) return;
+
         return async () => {
             // this.setState({
             //     isloading: true
@@ -113,15 +115,17 @@ export default class DAppList extends Component{
         }
         return async() => {
             console.log(currentPage)
-            if(this.state.isloading) return
+            if(this.state.isloading) return;
+            if(this.state.currentPage === currentPage) return;
             this.setState({
                 isloading: true,
                 currentPage
             })
             let originData = await API.getPageData(platform, currentPage);
-            this.setCoinPrice(originData);
+            let dappData = await this.setCoinPrice(originData);
+
             this.setState({
-                dappData: originData.results,
+                dappData,
                 isloading: false
             })
         }

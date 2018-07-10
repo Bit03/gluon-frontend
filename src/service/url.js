@@ -8,8 +8,8 @@ const URL = {
     getOrg: baseUrl + "/api/github/org/",
     getCommitData: baseUrl + "/api/github/repos/",
     getStateData: baseUrl + "/api/github/repos/",
+    getDetailData: baseUrl + "/api/dapps/",
     getPriceData: "https://www.feixiaohao.tech/api/coin/getICOInfo?",
-    getDetailData: "/api/dapps/",
     getSearchData: "https://api.chainnews.com/api/articles/search?q="
 }
 

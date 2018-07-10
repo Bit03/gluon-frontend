@@ -50,6 +50,7 @@ class FetchApi{
     getPriceData = async ( symbolArray ) => {
         let origin = await fetch(URL.getPriceData + symbolArray);
         let result = await origin.json();
+        result = result.data.map(item => dottie.flatten(item))
 
         return result;
     }
