@@ -1,5 +1,5 @@
-const baseUrl = "https://api.dapprank.com"
-// const baseUrl = ""
+// const baseUrl = "https://api.dapprank.com"
+const baseUrl = ""
 const PageSize = 21
 const URL = {
     getDappData: baseUrl + `/api/dapps/?size=${PageSize}`,
