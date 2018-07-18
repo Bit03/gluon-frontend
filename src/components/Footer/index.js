@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Content, Row, Span, Title } from '../../base';
+import { Container, Content, Row, Span } from '../../base';
 import styled from 'styled-components';
+import { Text } from '@base-style'
 
 const Info = styled.div`
     border-left: 1px solid #fff;
@@ -13,7 +14,7 @@ export default class Footer extends Component{
         return <Container BgColor="#202020" width="100%">
             <Content>
                 <Row height="94px" justifyContent="flex-start">
-                    <Title bold>{this.props.title}</Title>
+                    <Text size={22} color="#fff" bold>{this.props.title}</Text>
                     <Info>
                         <Span>DappRank 只专注于最真实数据排行，只专注于最真实数据排行。</Span>
                         <Span>2017-2018 All rights reserved</Span>
