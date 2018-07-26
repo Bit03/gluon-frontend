@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-
-import { ItemLink } from '../../base';
-import { Wrapper, NavsItem } from './styles';
+import { Wrapper, NavsItem, ItemLink } from './styles';
 
 export default class Navs extends Component{
     renderNavsItems = () => {
@@ -17,7 +15,7 @@ export default class Navs extends Component{
     }
     render() {
         return (
-            <Wrapper>
+            <Wrapper margin={this.props.marginLeft}>
                 { this.renderNavsItems() }
             </Wrapper>
         )

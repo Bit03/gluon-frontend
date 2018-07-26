@@ -13,6 +13,7 @@ const Container = styled.div`
     background-image: ${p => p.bgImage ? p.bgImage : null};
     padding: ${props => props.padding ? props.padding : null};
     margin: ${props => props.margin ? props.margin : "0 auto"};
+    position: relative;
 
     /* margin: 0 auto; */
     /* padding: 0 15px; */
@@ -21,6 +22,7 @@ const Row = styled.div`
     /* margin: 0 -15px; */
     margin: ${props => props.margin ? props.margin : null};
     padding: ${props => props.padding ? props.padding : "0 -15px"};
+    height: ${props => props.height ? props.height + "px" : null};
     ::after{
         display: block;
         content: " ";

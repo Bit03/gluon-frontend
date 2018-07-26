@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-
 import Navs from '../Navs';
 import SearchBar from '../SearchBar';
-
-import { Container, Content, Row } from '../../base';
-import { Text } from '@base-style'
+import { Text, Container, FlexBox, Base } from '@base-style'
 
 export default class Header extends Component{
     constructor(props){
@@ -24,20 +21,20 @@ export default class Header extends Component{
         let navs = [{id: "001", name: "首页", url: "/"}, {id: "002", name: "排行榜", url: "/rank"}]
 
         return (
-            <Container
+            <Base
                 width="100%"
-                BgImage="linear-gradient(90deg, #63E0D0 0%, #249CFF 100%, #8455D8 100%)">
-                <Content height="66px">
-                    <Row>
+                bgImage="linear-gradient(90deg, #63E0D0 0%, #249CFF 100%, #8455D8 100%)">
+                <Container>
+                    <FlexBox height={70}>
                         <Text color="#fff" size={22} bold>DApp Rank</Text>
-                        <Navs
-                            navItem={navs}
-                            activeIndex={ this.state.activeIndex }
-                            changeActiveIndex={ this.changeActiveIndex }/>
                         <SearchBar />
-                    </Row>
-                </Content>
-            </Container>
+                    </FlexBox>
+                    <Navs
+                        navItem={navs}
+                        activeIndex={ this.state.activeIndex }
+                        changeActiveIndex={ this.changeActiveIndex }/>
+                </Container>
+            </Base>
         )
     }
 }
