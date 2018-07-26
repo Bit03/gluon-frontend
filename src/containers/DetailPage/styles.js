@@ -120,7 +120,7 @@ const GithubItem = styled.div`
 `;
 const LoadingWrapper = styled.div`
     width: 100%;
-    min-height: calc(100vh - 160px);
+    min-height: calc(100vh - 150px);
     display: flex;
     justify-content: center;
     align-items: center;

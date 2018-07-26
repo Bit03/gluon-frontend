@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-
+// import lightTheme from '../../theme/color';
+// import Theme from '../../theme/color';
 const TopRank = styled.div`
     width: 100%;
     margin-top: 20px;

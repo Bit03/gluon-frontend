@@ -1,5 +1,5 @@
-// const baseUrl = "https://api.dapprank.com"
-const baseUrl = ""
+const baseUrl = "https://api.dapprank.com"
+// const baseUrl = ""
 const PageSize = 21
 const URL = {
     getDappData: baseUrl + `/api/dapps/?size=${PageSize}`,
@@ -9,7 +9,7 @@ const URL = {
     getCommitData: baseUrl + "/api/github/repos/",
     getStateData: baseUrl + "/api/github/repos/",
     getDetailData: baseUrl + "/api/dapps/",
-    getPriceData: "https://www.feixiaohao.tech/api/coin/getICOInfo?",
+    getPriceData: "https://api.blockinner.com/v2/api/coin/getICOInfo?",
     getSearchData: "https://api.chainnews.com/api/articles/search?q="
 }
 

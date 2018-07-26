@@ -44,13 +44,15 @@ export default class DAppList extends Component{
             platform
         })
         let originData = await API.getDappByPlatform(platform);
+        this.setState({
+            dappData: originData.results,
+            totalPage: originData.count % 21 === 0 ? Math.floor(originData.count / 21) : Math.floor(originData.count / 21) + 1,
+            isloading: false
+        })
         let dappData = await this.setCoinPrice(originData);
 
         this.setState({
-            dappData,
-            // next: originData.next,
-            totalPage: originData.count % 21 === 0 ? Math.floor(originData.count / 21) : Math.floor(originData.count / 21) + 1,
-            isloading: false
+            dappData
         })
     }
     setCoinPrice = async( originData ) => {
@@ -136,7 +138,7 @@ export default class DAppList extends Component{
 
         return(
             <Container>
-                <Line w={this.state.isloading ? "80%" : "100%"}/>
+                <Line width={isloading ? "80%" : "100%"}/>
                 <TopBar changeShowCard={this._changeShowCard} isCard={isCard}/>
                 <Row alignItems="flex-start">
                     <Col flex={1}>
